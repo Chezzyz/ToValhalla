@@ -1,0 +1,53 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+Assets/AssetStoreTools*
+Logs/
+UserSettings/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.user
+*.unityproj
+*.booproj
+.vs
+
+# Ignore sln files by default, remove this directive if more advanced setup is required.
+*.sln
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+!src/*/Assets/UserWorkspace
+src/*/Assets/UserWorkspace/*
+!src/*/Assets/UserWorkspace/.gitkeep
+
+# ================= #
+# Exlude docs build #
+# ================= #
+/docs/build
+
+# ================= #
+# Exlude builds     #
+# ================= #
+src/*/Builds
+src/Jabka/ProjectSettings/ProjectVersion.txt
