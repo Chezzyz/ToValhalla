@@ -9,13 +9,16 @@ namespace Input
     public class ThrowScalesController : MonoBehaviour
     {
         [SerializeField] private float _directionScaleSpeed;
-        [SerializeField] private float _directionScaleLimit;
-
-        [SerializeField] private float _powerScaleLimit;
         [SerializeField] private float _powerScaleSpeed;
 
+        [SerializeField] private float _greenScaleValue;
+        [SerializeField] private float _yellowScaleValue;
+        [SerializeField] private float _redScaleValue;
+
         public static event Action<float, float> ThrowStarted;
-        public static event Action<ScaleType, float> ScaleChanged;
+        public static event Action<float> DirectionScaleChanged;
+        public static event Action<float> PowerScaleChanged;
+        public static event Action PowerScaleFailed;
 
         private float _throwDirectionAngle;
         private Coroutine _directionCoroutine;
@@ -25,69 +28,70 @@ namespace Input
 
         private bool _isPreparationState = true;
 
-        public enum ScaleType
-        {
-            Power,
-            Direction
-        }
-
         private void OnEnable()
         {
             StartSessionHandler.SessionStarted += OnSessionStarted;
             InputHandler.FingerDown += OnFingerDown;
-            InputHandler.FingerUp += OnFingerUp;
-            ScaleChanged += OnScaleChanged;
+            DirectionScaleChanged += OnDirectionScaleChanged;
+            PowerScaleChanged += OnPowerScaleChanged;
         }
 
-        private void OnScaleChanged(ScaleType scaleType, float value)
+        private void OnPowerScaleChanged(float value)
         {
-            if (scaleType == ScaleType.Power) _throwPower = value;
-            if (scaleType == ScaleType.Direction) _throwDirectionAngle = value;
+            _throwPower = value;
+        }
+
+        private void OnDirectionScaleChanged(float value)
+        {
+            _throwDirectionAngle = value;
         }
 
         private void OnSessionStarted()
         {
             _isPreparationState = true;
-            _directionCoroutine =
-                StartCoroutine(ScaleCoroutine(_throwDirectionAngle, -_directionScaleLimit, _directionScaleLimit,
-                    _directionScaleSpeed,
-                    ScaleType.Direction));
-        }
-
-        private void OnFingerUp(float age)
-        {
-            if (!_isPreparationState) return;
-            StopCoroutine(_powerCoroutine);
-            ThrowStarted?.Invoke(_throwDirectionAngle, _throwPower);
-            _isPreparationState = false;
+            _directionCoroutine = StartCoroutine(DirectionScaleCoroutine(_directionScaleSpeed));
+            _powerCoroutine = StartCoroutine(PowerScaleCoroutine(_powerScaleSpeed));
         }
 
         private void OnFingerDown()
         {
             if (!_isPreparationState) return;
             StopCoroutine(_directionCoroutine);
-            _powerCoroutine =
-                StartCoroutine(ScaleCoroutine(_throwPower, 0, _powerScaleLimit, _powerScaleSpeed, ScaleType.Power));
+            StopCoroutine(_powerCoroutine);
+            ThrowStarted?.Invoke(_throwDirectionAngle, _throwPower);
+            _isPreparationState = false;
         }
 
-        private IEnumerator ScaleCoroutine(float scaleValue, float botLimit, float topLimit, float speed,
-            ScaleType scaleType)
+        private IEnumerator DirectionScaleCoroutine(float speed)
         {
+            float scaleValue = 0;
             while (true)
             {
-                while (scaleValue > botLimit)
+                while (scaleValue <= 360)
                 {
-                    scaleValue -= speed * Time.deltaTime;
-                    ScaleChanged?.Invoke(scaleType, scaleValue);
+                    scaleValue += speed * Time.deltaTime;
+                    DirectionScaleChanged?.Invoke(scaleValue);
                     yield return null;
                 }
 
-                while (scaleValue < topLimit)
+                scaleValue = 0;
+            }
+        }
+
+        private IEnumerator PowerScaleCoroutine(float speed)
+        {
+            float scaleValue = 0;
+            while (true)
+            {
+                while (scaleValue <= 100)
                 {
                     scaleValue += speed * Time.deltaTime;
-                    ScaleChanged?.Invoke(scaleType, scaleValue);
+                    PowerScaleChanged?.Invoke(scaleValue);
                     yield return null;
                 }
+                
+                PowerScaleFailed?.Invoke();
+                break;
             }
         }
 
@@ -95,7 +99,8 @@ namespace Input
         {
             StartSessionHandler.SessionStarted -= OnSessionStarted;
             InputHandler.FingerDown -= OnFingerDown;
-            InputHandler.FingerUp -= OnFingerUp;
+            DirectionScaleChanged -= OnDirectionScaleChanged;
+            PowerScaleChanged -= OnPowerScaleChanged;
         }
     }
 }

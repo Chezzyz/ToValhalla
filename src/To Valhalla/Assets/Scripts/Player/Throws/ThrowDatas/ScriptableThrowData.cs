@@ -17,17 +17,13 @@ namespace Player.Throws.ThrowDatas
     [System.Serializable]
     public struct CalculatedThrowData
     {
-        public float Height;
-        public float Length;
-        public float Duration;
-        public AnimationCurve Curve;
+        public Vector2[] Points;
+        public float DeltaTime;
 
-        public CalculatedThrowData(float height, float length, float duration, AnimationCurve curve)
+        public CalculatedThrowData(Vector2[] points, float deltaTime)
         {
-            Height = height;
-            Length = length;
-            Duration = duration;
-            Curve = curve;
+            Points = points;
+            DeltaTime = deltaTime;
         }
     }
     
@@ -35,14 +31,11 @@ namespace Player.Throws.ThrowDatas
     public struct ThrowData
     {
         public float Weight;
-        public AnimationCurve Curve;
 
         public ThrowData(float weight,
-            float minDuration, float maxDuration,
             AnimationCurve curve)
         {
             Weight = weight;
-            Curve = curve;
         }
     }
 }

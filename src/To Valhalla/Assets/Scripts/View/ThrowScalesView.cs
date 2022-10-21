@@ -14,7 +14,8 @@ namespace View
 
         private void OnEnable()
         {
-            ScaleChanged += OnScaleChanged;
+            DirectionScaleChanged += OnDirectionScaleChanged;
+            PowerScaleChanged += OnPowerScaleChanged;
             ThrowStarted += OnThrowStarted;
         }
 
@@ -23,17 +24,14 @@ namespace View
             _scalesParent.enabled = false;
         }
 
-        private void OnScaleChanged(ScaleType scaleType, float value)
+        private void OnDirectionScaleChanged(float value)
         {
-            if (scaleType == ScaleType.Power)
-            {
-                ChangePowerScale(value);
-            }
-
-            if (scaleType == ScaleType.Direction)
-            {
-                ChangeDirectionScale(value);
-            }
+            ChangeDirectionScale(value);
+        }
+        
+        private void OnPowerScaleChanged(float value)
+        {
+            ChangePowerScale(value);
         }
 
         private void ChangePowerScale(float value)
@@ -49,7 +47,8 @@ namespace View
 
         private void OnDisable()
         {
-            ScaleChanged -= OnScaleChanged;
+            DirectionScaleChanged -= OnDirectionScaleChanged;
+            PowerScaleChanged -= OnPowerScaleChanged;
             ThrowStarted -= OnThrowStarted;
         }
     }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caab58d732f84575bd9e712b2cb7e04a, type: 3}
-  m_Name: SimpleThrowData
+  m_Name: SimpleThrowData 1
   m_EditorClassIdentifier: 
   _throwData:
-    Weight: 3
+    Weight: 1
     Curve:
       serializedVersion: 2
       m_Curve:
