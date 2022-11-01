@@ -31,7 +31,7 @@ namespace Input
         private void OnEnable()
         {
             StartSessionHandler.SessionStarted += OnSessionStarted;
-            InputHandler.FingerDown += OnFingerDown;
+            InputHandler.FingerUp += OnFingerUp;
             DirectionScaleChanged += OnDirectionScaleChanged;
             PowerScaleChanged += OnPowerScaleChanged;
         }
@@ -53,12 +53,12 @@ namespace Input
             _powerCoroutine = StartCoroutine(PowerScaleCoroutine(_powerScaleSpeed));
         }
 
-        private void OnFingerDown()
+        private void OnFingerUp(float _)
         {
             if (!_isPreparationState) return;
             StopCoroutine(_directionCoroutine);
             StopCoroutine(_powerCoroutine);
-            ThrowStarted?.Invoke(_throwDirectionAngle, _throwPower);
+            ThrowStarted?.Invoke((_throwDirectionAngle + 90) % 360, _throwPower);
             _isPreparationState = false;
         }
 
@@ -98,7 +98,7 @@ namespace Input
         private void OnDisable()
         {
             StartSessionHandler.SessionStarted -= OnSessionStarted;
-            InputHandler.FingerDown -= OnFingerDown;
+            InputHandler.FingerUp -= OnFingerUp;
             DirectionScaleChanged -= OnDirectionScaleChanged;
             PowerScaleChanged -= OnPowerScaleChanged;
         }
