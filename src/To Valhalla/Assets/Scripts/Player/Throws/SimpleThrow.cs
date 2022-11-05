@@ -6,7 +6,7 @@ namespace Player.Throws
 {
     public class SimpleThrow : BaseThrow
     {
-        [SerializeField] private ScriptableThrowData _throwData;
+        [SerializeField] private Hummers.HummerHandler _hummerHandler;
 
         private Coroutine _throwCoroutine;
 
@@ -15,7 +15,7 @@ namespace Player.Throws
         public void DoSimpleThrow(PlayerTransformController controller, float directionAngle, float power)
         {
             CalculatedThrowData calculatedThrowData = CalculatedThrowDataPoints(directionAngle, power,
-                controller.GetPosition(), _throwData.GetThrowData().Weight);
+                controller.GetPosition(), _hummerHandler.GetCurrentHummerData().GetHummerWeight());
             _throwCoroutine = StartCoroutine(ThrowCoroutinePoints(controller, calculatedThrowData));
         }
 
@@ -55,7 +55,7 @@ namespace Player.Throws
         public void DoSimpleDash(PlayerTransformController controller, float power)
         {
             CalculatedThrowData calculatedThrowData =
-                CalculateThrowDataDash(power, controller.GetPosition(), _throwData.GetThrowData().Weight);
+                CalculateThrowDataDash(power, controller.GetPosition(), _hummerHandler.GetCurrentHummerData().GetHummerWeight());
             _throwCoroutine = StartCoroutine(ThrowCoroutinePoints(controller, calculatedThrowData));
         }
 
