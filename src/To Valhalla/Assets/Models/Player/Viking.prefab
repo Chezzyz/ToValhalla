@@ -272,7 +272,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fe092b2d123299c4c9903527482d59b7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -280,7 +280,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2351541917594418417
@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 2351541918370050576}
   - component: {fileID: 2351541918370050607}
   - component: {fileID: 2351541918370050577}
+  - component: {fileID: 1127417537}
   m_Layer: 0
   m_Name: Viking
   m_TagString: Untagged
@@ -475,4 +476,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3b9a71d75d4e2a91c3d49a162be12d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwData: {fileID: 11400000, guid: 56867641b8d353344b96da1a8d0c19fa, type: 2}
+  _hummerHandler: {fileID: 1127417537}
+--- !u!114 &1127417537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2351541918370050604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9937dc6b2d3b069408e03d7cee26043f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHummerImage: {fileID: 2351541917476079849}
+  _currentHummerData: {fileID: 11400000, guid: aad0fd7c98799644ba4aac7ad0af26b6, type: 2}
