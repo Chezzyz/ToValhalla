@@ -357,11 +357,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8424634440075654869, guid: a88ae5d8103648e4eaa5a9e7e5e39162, type: 3}
   m_PrefabInstance: {fileID: 8424634439690808964}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &576146617 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1312288179012475738, guid: 709c3fcf896202140b1359f7da316bc4, type: 3}
-  m_PrefabInstance: {fileID: 1312288178503997411}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &591907619 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3529779268814109615, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
@@ -539,6 +534,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 259659155078212239, guid: 7fa9f23dc7cd3b140ac6c7c67df63e38, type: 3}
   m_PrefabInstance: {fileID: 259659156325627548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1293719375 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2586027560856797401, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
+  m_PrefabInstance: {fileID: 3529779269371965580}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1346441492 stripped
 MonoBehaviour:
@@ -1165,6 +1165,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4364303422182631557}
     m_Modifications:
+    - target: {fileID: 3529779268447433092, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529779268814109614, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
       propertyPath: m_Name
       value: grp_CirclePowerScale
@@ -1637,7 +1641,7 @@ PrefabInstance:
     - target: {fileID: 8424634440237304704, guid: a88ae5d8103648e4eaa5a9e7e5e39162, type: 3}
       propertyPath: _powerScale
       value: 
-      objectReference: {fileID: 576146617}
+      objectReference: {fileID: 1293719375}
     - target: {fileID: 8424634440237304704, guid: a88ae5d8103648e4eaa5a9e7e5e39162, type: 3}
       propertyPath: _scalesParent
       value: 

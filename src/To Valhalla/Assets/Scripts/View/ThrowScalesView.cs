@@ -7,16 +7,18 @@ namespace View
     public class ThrowScalesView : MonoBehaviour
     {
         [SerializeField] private Transform _directionArrow;
-        [SerializeField] private RectTransform _powerScale;
-        [SerializeField] private float _powerScaleTopLimit;
-        [SerializeField] private float _powerScaleBotLimit;
+        [SerializeField] private RectTransform _powerScalePivot;
         [SerializeField] private Canvas _scalesParent;
+
+        private float _originZRotation;
 
         private void OnEnable()
         {
             DirectionScaleChanged += OnDirectionScaleChanged;
             PowerScaleChanged += OnPowerScaleChanged;
             ThrowStarted += OnThrowStarted;
+
+            _originZRotation = _powerScalePivot.localEulerAngles.z;
         }
 
         private void OnThrowStarted(float arg1, float arg2)
@@ -36,8 +38,8 @@ namespace View
 
         private void ChangePowerScale(float value)
         {
-            float newPosY = Mathf.Lerp(_powerScaleBotLimit, _powerScaleTopLimit, value / 100);
-            _powerScale.anchoredPosition = new Vector2(_powerScale.localPosition.x, newPosY);
+            float newZ = Mathf.Lerp(_originZRotation, _originZRotation - 360f, value / 100);
+            _powerScalePivot.eulerAngles = new Vector3(0f, 0f, newZ);
         }
 
         private void ChangeDirectionScale(float value)

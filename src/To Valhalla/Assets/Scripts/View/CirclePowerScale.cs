@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CirclePowerScale : MonoBehaviour
 {
     [SerializeField] private List<Image> _sectors = new List<Image>();
+    [SerializeField] private Transform _scaleLinePivot;
     [SerializeField] private List<float> _testValues = new List<float>();
 
     private void Start()
@@ -20,6 +21,7 @@ public class CirclePowerScale : MonoBehaviour
             throw new ArgumentException("Count of values doesn't match sectors count");
 
         float previousSectorAngleOffset = -(360f * startOffsetInPercent / 100f);
+        SetScaleLinePivot(origin, previousSectorAngleOffset);
 
         for (int i = 0; i < _sectors.Count; i++)
         {
@@ -37,5 +39,25 @@ public class CirclePowerScale : MonoBehaviour
             }
 
         }
+    }
+
+    private void SetScaleLinePivot(Image.Origin360 origin, float offset)
+    {
+        switch (origin)
+        {
+            case Image.Origin360.Left:
+                offset += 90f;
+                break;
+            case Image.Origin360.Bottom:
+                offset += 180f;
+                break;
+            case Image.Origin360.Right:
+                offset += 270f;
+                break;
+            default:
+                break;
+        }
+
+        _scaleLinePivot.localEulerAngles = new Vector3(0f, 0f, offset);
     }
 }
