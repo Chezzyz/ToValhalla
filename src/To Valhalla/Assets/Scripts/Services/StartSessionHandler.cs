@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace Services
     public class StartSessionHandler : MonoBehaviour
     {
         [SerializeField] private Button _startButton;
+        [SerializeField] private List<GameObject> _objectsToDeactivate;
 
         public static event Action SessionStarted;
         
@@ -18,7 +20,10 @@ namespace Services
         private void OnStartButtonClicked()
         {
             SessionStarted?.Invoke();
-            _startButton.gameObject.SetActive(false);
+            foreach (var obj in _objectsToDeactivate)
+            {
+                obj.SetActive(false);
+            }
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using Player.Throws.ThrowDatas;
+﻿using Hammers;
 using UnityEngine;
 
 namespace Player.Throws
 {
     public class SimpleThrow : BaseThrow
     {
-        [SerializeField] private Hummers.HummerHandler _hummerHandler;
+        [SerializeField] private HammerHandler _hammerHandler;
 
         private Coroutine _throwCoroutine;
 
@@ -15,7 +14,7 @@ namespace Player.Throws
         public void DoSimpleThrow(PlayerTransformController controller, float directionAngle, float power)
         {
             CalculatedThrowData calculatedThrowData = CalculatedThrowDataPoints(directionAngle, power,
-                controller.GetPosition(), _hummerHandler.GetCurrentHummerData().GetHummerWeight());
+                controller.GetPosition(), _hammerHandler.GetCurrentHummerData());
             _throwCoroutine = StartCoroutine(ThrowCoroutinePoints(controller, calculatedThrowData));
         }
 
@@ -26,12 +25,12 @@ namespace Player.Throws
         }
 
         private CalculatedThrowData CalculatedThrowDataPoints(float directionAngle, float power, Vector2 originPos,
-            float weight)
+            ScriptableHammerData hammerData)
         {
             float radAngle = Mathf.Abs(directionAngle) * Mathf.Deg2Rad;
             float sin = Mathf.Sin(radAngle);
 
-            float velocity = power * weight;
+            float velocity = power * hammerData.GetWeight();
             float duration = (velocity * sin + Mathf.Sqrt(Mathf.Pow(velocity * sin, 2) + 2 * 9.81f * originPos.y)) / 9.81f;
 
             float deltaTime = 1f / 90;
@@ -49,19 +48,19 @@ namespace Player.Throws
             _points = points;
 
             Debug.Log($"duration={duration}, pointsCount={pointsCount}, angle = {directionAngle}");
-            return new CalculatedThrowData(points, deltaTime, velocity, radAngle);
+            return new CalculatedThrowData(points, deltaTime, velocity, radAngle, hammerData);
         }
 
         public void DoSimpleDash(PlayerTransformController controller, float power)
         {
             CalculatedThrowData calculatedThrowData =
-                CalculateThrowDataDash(power, controller.GetPosition(), _hummerHandler.GetCurrentHummerData().GetHummerWeight());
+                CalculateThrowDataDash(power, controller.GetPosition(), _hammerHandler.GetCurrentHummerData());
             _throwCoroutine = StartCoroutine(ThrowCoroutinePoints(controller, calculatedThrowData));
         }
 
-        private CalculatedThrowData CalculateThrowDataDash(float power, Vector2 originPos, float weight)
+        private CalculatedThrowData CalculateThrowDataDash(float power, Vector2 originPos, ScriptableHammerData hammerData)
         {
-            float velocity = power * weight;
+            float velocity = power * hammerData.GetWeight();
             float duration = (-velocity + Mathf.Sqrt(Mathf.Pow(velocity, 2) + 2 * 9.81f * originPos.y)) / 9.81f;
             float deltaTime = 1f / 90;
             int pointsCount = (int)((duration) / deltaTime);
@@ -75,7 +74,7 @@ namespace Player.Throws
             }
 
             Debug.Log($"duration={duration}, pointsCount={pointsCount}");
-            return new CalculatedThrowData(points, deltaTime, velocity, 270 * Mathf.Deg2Rad);
+            return new CalculatedThrowData(points, deltaTime, velocity, 270 * Mathf.Deg2Rad, hammerData);
         }
 
         private void OnDrawGizmos()

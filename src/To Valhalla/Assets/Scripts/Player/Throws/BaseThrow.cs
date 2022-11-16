@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Player.Throws.ThrowDatas;
 using UnityEngine;
 
 namespace Player.Throws

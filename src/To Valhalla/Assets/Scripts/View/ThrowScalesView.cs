@@ -21,7 +21,7 @@ namespace View
             _originZRotation = _powerScalePivot.localEulerAngles.z;
         }
 
-        private void OnThrowStarted(float arg1, float arg2)
+        private void OnThrowStarted(float _, float _2)
         {
             _scalesParent.enabled = false;
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Level.Spawn
@@ -21,7 +22,7 @@ namespace Level.Spawn
 
 
         public List<T> SpawnObjects<T>(T prefab, Vector2Int sector, Vector2Int objectCellSize, int count,
-            Transform parent) where T : MonoBehaviour
+            Transform parent) where T : Object
         {
             List<(Vector2Int cell, Vector2 pos)> spawnPoints = CalculateSpawnPositions(sector, objectCellSize).ToList();
             Vector2Int[] objectCells = CalculateObjectCellPositions(objectCellSize);
