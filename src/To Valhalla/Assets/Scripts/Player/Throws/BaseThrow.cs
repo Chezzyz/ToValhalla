@@ -6,7 +6,8 @@ namespace Player.Throws
 {
     public abstract class BaseThrow : MonoBehaviour
     {
-        public static event Action<float, float> VelocityChanged; 
+        public static event Action<float, float> VelocityChanged;
+        public static event Action ThrowCompleted;
         private bool _isInThrow;
 
         public bool IsInThrow()
@@ -39,7 +40,7 @@ namespace Player.Throws
                 
                 yield return new WaitForSeconds(throwData.DeltaTime);
             }
-
+            ThrowCompleted?.Invoke();
             _isInThrow = false;
         }
 

@@ -12,7 +12,7 @@ namespace Level.Spawn
         [SerializeField] private Bounds _bounds;
         [SerializeField] private Vector2 _cellPaddings;
         [SerializeField] private Vector2 _minimalCellSize;
-        [SerializeField] private bool _drawCells;
+        [SerializeField] private Vector2 _rootOffset;
 
         private Vector2[,] _cellCenters;
         private bool[,] _cellFilledMap;
@@ -57,7 +57,7 @@ namespace Level.Spawn
                     float xDelta = 2 * xFirst;
                     float yFirst = CellHalfY;
                     float yDelta = 2 * yFirst;
-                    _cellCenters[y, x] = new Vector2(xFirst + xDelta * x - _bounds.extents.x, yFirst + yDelta * y);
+                    _cellCenters[y, x] = new Vector2(xFirst + xDelta * x - _bounds.extents.x, yFirst + yDelta * y - _bounds.extents.y);
                 }
             }
 
@@ -84,10 +84,18 @@ namespace Level.Spawn
                 }
             }
 
+            Vector2 offset = _rootOffset + new Vector2(sector.x * _bounds.extents.x * 2, sector.y * _bounds.extents.y * 2);
+            
             return possibleCells
-                .Select(cell => (cell, cellCenters[cell.y, cell.x]))
+                .Select(cell => (cell, GetCellCenterWithOffset(cellCenters, cell, offset)))
                 .Select(cellPosPair => (cellPosPair.cell, CellCenterToObjectCenter(cellPosPair.Item2, objectCellSize)))
                 .ToArray();
+        }
+
+        private Vector2 GetCellCenterWithOffset(Vector2[,] cellCenters, Vector2Int cell, Vector2 offset)
+        {
+            Vector2 cellCenter = cellCenters[cell.y, cell.x];
+            return new Vector2(cellCenter.x + offset.x, cellCenter.y + offset.y);
         }
 
         private Vector2 CellCenterToObjectCenter(Vector2 cellCenter, Vector2Int objectCellSize)
@@ -147,17 +155,6 @@ namespace Level.Spawn
             int gridCellWidth = (int)Mathf.Floor(gridUnitsWidth / (cellSize.x + 2 * cellPadding.x));
 
             return new Vector2Int(gridCellWidth, gridCellHeight);
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (_cellCenters is not null && _drawCells)
-            {
-                foreach (var center in _cellCenters)
-                {
-                    Gizmos.DrawCube(center, _minimalCellSize);
-                }
-            }
         }
     }
 }
