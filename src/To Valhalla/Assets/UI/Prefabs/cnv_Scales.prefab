@@ -113,28 +113,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2596671979332865208, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2596671979332865208, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
       propertyPath: m_SizeDelta.y
       value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2596671979332865208, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2596671979332865208, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2596671979332865208, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2596671979332865208, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2596671979332865208, guid: 64b5c68a05764e84e8616476f2d94eed, type: 3}
       propertyPath: m_AnchoredPosition.y

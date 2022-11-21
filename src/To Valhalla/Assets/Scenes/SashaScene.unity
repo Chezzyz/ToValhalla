@@ -352,7 +352,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -635,6 +635,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3191436011716726246, guid: 5150111916210ab47a88169e0d815a75, type: 3}
+      propertyPath: _drawCells
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3191436011716726246, guid: 5150111916210ab47a88169e0d815a75, type: 3}
+      propertyPath: _bounds.m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3191436011716726246, guid: 5150111916210ab47a88169e0d815a75, type: 3}
       propertyPath: _bounds.m_Extent.x
       value: 100
       objectReference: {fileID: 0}
@@ -649,6 +657,10 @@ PrefabInstance:
     - target: {fileID: 3191436011716726247, guid: 5150111916210ab47a88169e0d815a75, type: 3}
       propertyPath: m_Size.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3191436011716726247, guid: 5150111916210ab47a88169e0d815a75, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3191436011716726247, guid: 5150111916210ab47a88169e0d815a75, type: 3}
       propertyPath: m_Offset.y
@@ -696,6 +708,22 @@ PrefabInstance:
     - target: {fileID: 4767239582738678904, guid: 417a02f89f86f994b85162344890c74e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -160
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259391912310567791, guid: 417a02f89f86f994b85162344890c74e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199185578505191823, guid: 417a02f89f86f994b85162344890c74e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f3e507e2b3638254096d33a40e931bc2, type: 3}
+    - target: {fileID: 7199185578505191823, guid: 417a02f89f86f994b85162344890c74e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199185578505191823, guid: 417a02f89f86f994b85162344890c74e, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9131538567626123226, guid: 417a02f89f86f994b85162344890c74e, type: 3}
       propertyPath: m_Name
@@ -1388,7 +1416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3797049997248008401, guid: 19925f1caac9d2044ae4ad7266e90a33, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1190.4143
+      value: -31667.05
       objectReference: {fileID: 0}
     - target: {fileID: 3797049997353889262, guid: 19925f1caac9d2044ae4ad7266e90a33, type: 3}
       propertyPath: m_AnchorMax.x
