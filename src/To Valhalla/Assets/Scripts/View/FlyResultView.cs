@@ -1,37 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using Player;
-using System;
+using TMPro;
+using UnityEngine;
 
-public class FlyResultView : MonoBehaviour
+namespace View
 {
-    [SerializeField] private Player.PlayerFlyResult _playerFlyResult;
-    [Header("UI Parts")]
-    [SerializeField] private Canvas _targetCanvas;
-    [SerializeField] private TextMeshProUGUI _heightText;
-    [SerializeField] private TextMeshProUGUI _coinsText;
-    [SerializeField] private TextMeshProUGUI _artifactsText;
-    [SerializeField] private TextMeshProUGUI _keysText;
-
-    private void OnEnable()
+    public class FlyResultView : MonoBehaviour
     {
-        _playerFlyResult.PlayerFlightEnded += OnPlayerFlightEnded;
-    }
+        [Header("UI Parts")]
+        [SerializeField] private Canvas _targetCanvas;
+        [SerializeField] private TextMeshProUGUI _heightText;
+        [SerializeField] private TextMeshProUGUI _coinsText;
+        [SerializeField] private TextMeshProUGUI _artifactsText;
+        [SerializeField] private TextMeshProUGUI _keysText;
 
-    private void OnDisable()
-    {
-        _playerFlyResult.PlayerFlightEnded -= OnPlayerFlightEnded;
-    }
+        private void OnEnable()
+        {
+            FlyResultHandler.PlayerFlightEnded += OnPlayerFlightEnded;
+        }
 
-    private void OnPlayerFlightEnded(FlyResultData flightData)
-    {
-        _targetCanvas.enabled = true;
+        private void OnDisable()
+        {
+            FlyResultHandler.PlayerFlightEnded -= OnPlayerFlightEnded;
+        }
 
-        _heightText.text = flightData.flyHeight.ToString() + " m";
-        _coinsText.text = flightData.flyCoinsCount.ToString();
-        _artifactsText.text = flightData.artifactsCount.ToString();
-        _keysText.text = flightData.keysCount.ToString();
+        private void OnPlayerFlightEnded(FlyResultData flightData)
+        {
+            _targetCanvas.enabled = true;
+
+            _heightText.text = flightData.flyHeight.ToString() + " m";
+            _coinsText.text = flightData.flyCoinsCount.ToString();
+            _artifactsText.text = flightData.artifactsCount.ToString();
+            _keysText.text = flightData.keysCount.ToString();
+        }
     }
 }

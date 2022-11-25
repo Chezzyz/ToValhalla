@@ -1,14 +1,20 @@
 using Player.Throws;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerFlyResult : MonoBehaviour
+    public class FlyResultHandler : MonoBehaviour
     {
-        public event Action<FlyResultData> PlayerFlightEnded;
+        public static event Action<FlyResultData> PlayerFlightEnded;
 
-        [SerializeField] private Player _player;
+        private Player _player;
+
+        private void Start()
+        {
+            _player = FindObjectOfType<Player>();
+        }
 
         private void OnEnable()
         {
