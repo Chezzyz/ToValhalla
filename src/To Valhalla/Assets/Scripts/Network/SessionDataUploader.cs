@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using Newtonsoft.Json;
+using Player;
 using Player.Throws;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -17,20 +18,20 @@ namespace Network
 
         private void OnEnable()
         {
-            BaseThrow.ThrowCompleted += OnThrowCompleted;
+            FlyResultHandler.PlayerFlightEnded += OnPlayerFlightCompleted;
         }
 
-        private void OnThrowCompleted()
+        private void OnPlayerFlightCompleted(FlyResultData data)
         {
-            StartCoroutine(SendData());
+            StartCoroutine(SendData(data));
         }
 
-        private IEnumerator SendData()
+        private IEnumerator SendData(FlyResultData flightData)
         {
-            SessionData data =  new SessionData(_uuidHandler.GetUuid(), "username", DateTime.Now,
-                    new TimeSpan(0, 0, 30, 0), TimeSpan.FromSeconds(60),
-                    100, "Midgard", 10, 100, 1, 1, 1,
-                    new List<SessionData.Score>()
+            SessionData data =  new (_uuidHandler.GetUuid(), "username", DateTime.Now,
+                    new TimeSpan(0, 0, 30, 0), TimeSpan.FromSeconds(flightData.flyTime),
+                    flightData.flyHeight, "Midgard", flightData.flyCoinsCount, flightData.flyCoinsCount, 
+                    1, 1, 1, new List<SessionData.Score>()
                         { new ("Midgard", 100, 100, TimeSpan.FromSeconds(70)) });
 
             string json = JsonConvert.SerializeObject(data);
@@ -50,11 +51,13 @@ namespace Network
             {
                 Debug.Log($"Data Sent: {json}");
             }
+            
+            uwr.Dispose();
         }
 
         private void OnDisable()
         {
-            BaseThrow.ThrowCompleted -= OnThrowCompleted;
+            FlyResultHandler.PlayerFlightEnded -= OnPlayerFlightCompleted;
         }
     }
 
