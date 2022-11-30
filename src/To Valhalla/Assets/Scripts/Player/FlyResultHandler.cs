@@ -32,7 +32,7 @@ namespace Player
                 new FlyResultData(_player.GetCurrentFlightTime(), 
                 _player.GetCurrentMaxFlightHeight(),
                 _player.GetCurrentCoins(), 
-                0, 
+                _player.GetCurrentArtifactParts(), 
                 0);
 
             PlayerFlightEnded?.Invoke(newFlyData);

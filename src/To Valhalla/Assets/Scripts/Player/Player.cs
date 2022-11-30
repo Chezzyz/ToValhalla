@@ -9,6 +9,7 @@ namespace Player
         private PlayerFlightData _playerFlightData;
 
         private int _coins = 0;
+        private int _artifactParts = 0;
 
         //Правильнее наверное где-то вызывать Init() у этого Player, в какой-то точке сбора игры, чем тут писать Start()
         private void Start()
@@ -21,6 +22,7 @@ namespace Player
             Input.ThrowScalesController.ThrowStarted += OnThrowStarted;
             Throws.BaseThrow.ThrowCompleted += OnThrowCompleted;
         }
+
 
         private void OnDisable()
         {
@@ -48,12 +50,18 @@ namespace Player
             }
         }
 
+        public void AddArtifactPart(int value)
+        {
+            _artifactParts += value;
+        }
+
         public void AddCoins(int value)
         {
             _coins += value;
         }
 
         public int GetCurrentCoins() => _coins;
+        public int GetCurrentArtifactParts() => _artifactParts;
         public int GetCurrentMaxFlightHeight() => _playerFlightData.GetCurrentMaxFlightHeight();
         public float GetCurrentFlightTime() => _playerFlightData.GetCurrentFlightTime();
     }
