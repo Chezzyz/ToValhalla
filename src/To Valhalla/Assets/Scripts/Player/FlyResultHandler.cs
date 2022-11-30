@@ -28,12 +28,12 @@ namespace Player
 
         private void OnThrowCompleted()
         {
-            FlyResultData newFlyData = 
-                new FlyResultData(_player.GetCurrentFlightTime(), 
-                _player.GetCurrentMaxFlightHeight(),
-                _player.GetCurrentCoins(), 
-                _player.GetCurrentArtifactParts(), 
-                0);
+            FlyResultData newFlyData =
+                new (_player.GetCurrentFlightTime(),
+                    _player.GetCurrentMaxFlightHeight(),
+                    _player.GetCurrentCoins(),
+                    0,
+                    0);
 
             PlayerFlightEnded?.Invoke(newFlyData);
         }
@@ -41,19 +41,19 @@ namespace Player
 
     public class FlyResultData
     {
-        public float flyTime;
-        public int flyHeight;
-        public int flyCoinsCount;
-        public int artifactsCount;
-        public int keysCount;
+        public readonly float FlyTime;
+        public readonly int FlyHeight;
+        public readonly int FlyCoinsCount;
+        public readonly int ArtifactsCount;
+        public readonly int KeysCount;
 
         public FlyResultData(float flyTime, int flyHeight, int flyCoinsCount, int artifactsCount, int keysCount)
         {
-            this.flyTime = flyTime;
-            this.flyHeight = flyHeight;
-            this.flyCoinsCount = flyCoinsCount;
-            this.artifactsCount = artifactsCount;
-            this.keysCount = keysCount;
+            FlyTime = flyTime;
+            FlyHeight = flyHeight;
+            FlyCoinsCount = flyCoinsCount;
+            ArtifactsCount = artifactsCount;
+            KeysCount = keysCount;
         }
     }
 }

@@ -29,8 +29,8 @@ namespace Network
         private IEnumerator SendData(FlyResultData flightData)
         {
             SessionData data =  new (_uuidHandler.GetUuid(), "username", DateTime.Now,
-                    new TimeSpan(0, 0, 30, 0), TimeSpan.FromSeconds(flightData.flyTime),
-                    flightData.flyHeight, "Midgard", flightData.flyCoinsCount, flightData.flyCoinsCount, 
+                    new TimeSpan(0, 0, 30, 0), TimeSpan.FromSeconds(flightData.FlyTime),
+                    flightData.FlyHeight, "Midgard", flightData.FlyCoinsCount, flightData.FlyCoinsCount, 
                     1, 1, 1, new List<SessionData.Score>()
                         { new ("Midgard", 100, 100, TimeSpan.FromSeconds(70)) });
 

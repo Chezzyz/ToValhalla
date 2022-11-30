@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0dd1f2d83dd7e24ab2441a262caf81d, type: 3}
   m_Name: DefaultHammer
   m_EditorClassIdentifier: 
-  _hummerName: Broke hummer
-  _hummerDescription: Really?
-  _hummerSprite: {fileID: 21300000, guid: b214a9986830ca846b0862123d035e1e, type: 3}
+  _name: Default hammer
+  _description: default
+  _sprite: {fileID: 21300000, guid: b214a9986830ca846b0862123d035e1e, type: 3}
+  _cost: 0
   _weight: 1
-  _hummerType: 0
-  _cirleScalePartsInPercent:
+  _hammerType: 0
+  _scalePartsPercents:
   - 25
   - 25
   - 25

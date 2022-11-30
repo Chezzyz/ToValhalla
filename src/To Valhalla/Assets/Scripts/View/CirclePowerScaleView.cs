@@ -10,21 +10,8 @@ namespace View
 {
     public class CirclePowerScaleView : MonoBehaviour
     {
-        [SerializeField] private List<Image> _sectors = new ();
+        [SerializeField] private List<Image> _sectors = new();
         [SerializeField] private Transform _scaleLinePivot;
-        [SerializeField] private Image _scaleLine;
-
-        private void OnEnable()
-        {
-            StartSessionHandler.SessionStarted += OnSessionStarted;
-        }
-
-        private void OnSessionStarted()
-        {
-            _scaleLine.enabled = true;
-            ScriptableHammerData hammerData = FindObjectOfType<HammerHandler>().GetCurrentHummerData();
-            SetScaleSectors(Image.Origin360.Top, 0f, hammerData.GetScalePartsInPercent().ToList());
-        }
 
         public void SetScaleSectors(Image.Origin360 origin, float startOffsetInPercent, List<float> valuesInPercents)
         {
@@ -38,7 +25,8 @@ namespace View
             {
                 _sectors[_sectors.Count - 1 - i].fillOrigin = (int)origin;
                 _sectors[_sectors.Count - 1 - i].fillAmount = valuesInPercents[i] / 100f;
-                _sectors[_sectors.Count - 1 - i].transform.localEulerAngles = new Vector3(0f, 0f, previousSectorAngleOffset);
+                _sectors[_sectors.Count - 1 - i].transform.localEulerAngles =
+                    new Vector3(0f, 0f, previousSectorAngleOffset);
                 previousSectorAngleOffset -= (360 * valuesInPercents[i] / 100f);
             }
         }
@@ -62,11 +50,5 @@ namespace View
 
             _scaleLinePivot.localEulerAngles = new Vector3(0f, 0f, offset);
         }
-
-        private void OnDisable()
-        {
-            StartSessionHandler.SessionStarted -= OnSessionStarted;
-        }
-        
     }
 }
