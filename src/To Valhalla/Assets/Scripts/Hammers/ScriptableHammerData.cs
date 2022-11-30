@@ -28,17 +28,12 @@ namespace Hammers
         public string GetName() => _name;
         public string GetDescription() => _description;
         public int GetCoinCost() => _cost;
-
         public int GetArtifactPiecesCost() => 0;
-
         public Sprite GetSprite() => _sprite;
-
         public void Buy() => _isBought = true;
         public bool CanBuy() => CurrencyHandler.Instance.CoinsCount >= _cost;
         public bool IsBought() => _isBought;
-
         public StoreItemType GetStoreItemType() => StoreItemType.Hammer;
-        
         #endregion
 
         public float GetWeight() => _weight;

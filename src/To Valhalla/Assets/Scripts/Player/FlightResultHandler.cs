@@ -2,18 +2,19 @@ using Player.Throws;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using Store;
 
 namespace Player
 {
-    public class FlyResultHandler : MonoBehaviour
+    public class FlightResultHandler : MonoBehaviour
     {
-        public static event Action<FlyResultData> PlayerFlightEnded;
+        public static event Action<FlightResultData> PlayerFlightEnded;
 
-        private Player _player;
+        private FlightDataHandler _flightData;
 
         private void Start()
         {
-            _player = FindObjectOfType<Player>();
+            _flightData = FindObjectOfType<FlightDataHandler>();
         }
 
         private void OnEnable()
@@ -28,31 +29,31 @@ namespace Player
 
         private void OnThrowCompleted()
         {
-            FlyResultData newFlyData =
-                new (_player.GetCurrentFlightTime(),
-                    _player.GetCurrentMaxFlightHeight(),
-                    _player.GetCurrentCoins(),
-                    0,
+            FlightResultData newFlyData =
+                new (_flightData.GetCurrentFlightTime(),
+                    _flightData.GetCurrentMaxFlightHeight(),
+                    _flightData.FlightCoins,
+                    _flightData.FlightArtifactPieces,
                     0);
 
             PlayerFlightEnded?.Invoke(newFlyData);
         }
     }
 
-    public class FlyResultData
+    public class FlightResultData
     {
         public readonly float FlyTime;
         public readonly int FlyHeight;
         public readonly int FlyCoinsCount;
-        public readonly int ArtifactsCount;
+        public readonly int ArtifactPiecesCount;
         public readonly int KeysCount;
 
-        public FlyResultData(float flyTime, int flyHeight, int flyCoinsCount, int artifactsCount, int keysCount)
+        public FlightResultData(float flyTime, int flyHeight, int flyCoinsCount, int artifactPiecesCount, int keysCount)
         {
             FlyTime = flyTime;
             FlyHeight = flyHeight;
             FlyCoinsCount = flyCoinsCount;
-            ArtifactsCount = artifactsCount;
+            ArtifactPiecesCount = artifactPiecesCount;
             KeysCount = keysCount;
         }
     }

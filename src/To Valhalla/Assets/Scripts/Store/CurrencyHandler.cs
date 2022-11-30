@@ -7,13 +7,14 @@ namespace Store
 {
     public class CurrencyHandler : BaseGameHandler<CurrencyHandler>
     {
-        public int CoinsCount { get; private set; }
-        
-        public int ArtifactPiecesCount { get; private set; }
+        public int CoinsCount { get; private set; } = 100;
+
+        public int ArtifactPiecesCount { get; private set; } = 100;
 
         private void OnEnable()
         {
             Coin.CoinCollected += OnCoinCollected;
+            ArtifactPiece.ArtifactPieceCollected += OnArtifactPieceCollected;
         }
 
         public void SubtractCoins(int value)
@@ -49,6 +50,7 @@ namespace Store
         private void OnDisable()
         {
             Coin.CoinCollected -= OnCoinCollected;
+            ArtifactPiece.ArtifactPieceCollected -= OnArtifactPieceCollected;
         }
     }
 }
