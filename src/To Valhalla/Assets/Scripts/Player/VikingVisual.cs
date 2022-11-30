@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerVisual : MonoBehaviour
+    public class VikingVisual : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _playerRenderer;
         [SerializeField] private PlayerScriptableData _currentPlayer;

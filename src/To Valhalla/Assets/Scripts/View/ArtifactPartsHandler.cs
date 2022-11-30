@@ -12,7 +12,7 @@ namespace View
 
         private void OnEnable()
         {
-            ArtifactPart.ArtifactPartCollected += OnArtifactPartCollected;
+            ArtifactPiece.ArtifactPieceCollected += OnArtifactPartCollected;
         }
 
         private void OnArtifactPartCollected()
@@ -23,7 +23,7 @@ namespace View
 
         private void OnDisable()
         {
-            ArtifactPart.ArtifactPartCollected -= OnArtifactPartCollected;
+            ArtifactPiece.ArtifactPieceCollected -= OnArtifactPartCollected;
         }
     }
 }

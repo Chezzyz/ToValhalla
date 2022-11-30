@@ -15,21 +15,21 @@ namespace View
 
         private void OnEnable()
         {
-            FlyResultHandler.PlayerFlightEnded += OnPlayerFlightEnded;
+            FlightResultHandler.PlayerFlightEnded += OnPlayerFlightEnded;
         }
 
         private void OnDisable()
         {
-            FlyResultHandler.PlayerFlightEnded -= OnPlayerFlightEnded;
+            FlightResultHandler.PlayerFlightEnded -= OnPlayerFlightEnded;
         }
 
-        private void OnPlayerFlightEnded(FlyResultData flightData)
+        private void OnPlayerFlightEnded(FlightResultData flightData)
         {
             _targetCanvas.enabled = true;
 
             _heightText.text = flightData.FlyHeight.ToString() + " m";
             _coinsText.text = flightData.FlyCoinsCount.ToString();
-            _artifactsText.text = flightData.ArtifactsCount.ToString();
+            _artifactsText.text = flightData.ArtifactPiecesCount.ToString();
             _keysText.text = flightData.KeysCount.ToString();
         }
     }

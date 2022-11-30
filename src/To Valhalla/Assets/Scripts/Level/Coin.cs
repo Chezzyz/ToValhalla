@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Player;
 
 namespace Level
 {
@@ -9,13 +10,12 @@ namespace Level
         [SerializeField] private SpriteRenderer _renderer;
         [SerializeField] private Collider2D _collider;
         public static event Action CoinCollected;
+
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Player.Player player = col.GetComponentInParent<Player.Player>();
-            if (player is not null)
+            if (col.GetComponentInParent<Viking>())
             {
                 CoinCollected?.Invoke();
-                player.AddCoins(1);
                 _renderer.enabled = false;
                 _collider.enabled = false;
             }

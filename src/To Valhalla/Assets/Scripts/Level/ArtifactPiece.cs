@@ -1,23 +1,21 @@
 using System;
 using UnityEngine;
+using Player;
 
 namespace Level
 {
     [RequireComponent(typeof(Collider2D))]
-    public class ArtifactPart : MonoBehaviour
+    public class ArtifactPiece : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _renderer;
         [SerializeField] private Collider2D _collider;
-        public static event Action ArtifactPartCollected;
+        public static event Action ArtifactPieceCollected;
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Player.Player player = col.GetComponentInParent<Player.Player>();
-
-            if (player)
+            if (col.GetComponentInParent<Viking>())
             {
-                ArtifactPartCollected?.Invoke();
-                player.AddArtifactPart(1);
+                ArtifactPieceCollected?.Invoke();
                 _renderer.enabled = false;
                 _collider.enabled = false;
             }

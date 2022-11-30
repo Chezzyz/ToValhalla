@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Extent: {x: 50, y: 25, z: 0}
   _cellPaddings: {x: 0.25, y: 0.25}
   _minimalCellSize: {x: 1, y: 1}
-  _drawCells: 0
+  _rootOffset: {x: 0, y: 0}
 --- !u!61 &3191436011716726247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   - {fileID: 3191436011859726158}
   - {fileID: 3191436012213275485}
   - {fileID: 3191436011143923038}
+  - {fileID: 0}
 --- !u!1001 &1727998333320148567
 PrefabInstance:
   m_ObjectHideFlags: 0

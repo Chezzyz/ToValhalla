@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnablePref: {fileID: 5493138581700710675, guid: db67cabcaeabe384dac402c6e58653f3, type: 3}
   _objectCellSize: {x: 4, y: 4}
-  _count: 3
+  _count: 5
   _spawnGridCalculator: {fileID: 0}

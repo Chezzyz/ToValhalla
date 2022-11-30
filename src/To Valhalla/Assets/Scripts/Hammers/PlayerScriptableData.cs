@@ -1,7 +1,7 @@
 using UnityEngine;
 using NaughtyAttributes;
 
-[CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/Player", order = 0)]
+[CreateAssetMenu(fileName = "SkinData", menuName = "ScriptableObjects/Skin", order = 0)]
 public class PlayerScriptableData : ScriptableObject
 {
     [SerializeField] private string _skinName;

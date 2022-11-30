@@ -6,6 +6,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Player;
 using Player.Throws;
+using Store;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -18,19 +19,19 @@ namespace Network
 
         private void OnEnable()
         {
-            FlyResultHandler.PlayerFlightEnded += OnPlayerFlightCompleted;
+            FlightResultHandler.PlayerFlightEnded += OnPlayerFlightCompleted;
         }
 
-        private void OnPlayerFlightCompleted(FlyResultData data)
+        private void OnPlayerFlightCompleted(FlightResultData data)
         {
             StartCoroutine(SendData(data));
         }
 
-        private IEnumerator SendData(FlyResultData flightData)
+        private IEnumerator SendData(FlightResultData flightData)
         {
             SessionData data =  new (_uuidHandler.GetUuid(), "username", DateTime.Now,
                     new TimeSpan(0, 0, 30, 0), TimeSpan.FromSeconds(flightData.FlyTime),
-                    flightData.FlyHeight, "Midgard", flightData.FlyCoinsCount, flightData.FlyCoinsCount, 
+                    flightData.FlyHeight, "Midgard", flightData.FlyCoinsCount, CurrencyHandler.Instance.CoinsCount, 
                     1, 1, 1, new List<SessionData.Score>()
                         { new ("Midgard", 100, 100, TimeSpan.FromSeconds(70)) });
 
@@ -57,7 +58,7 @@ namespace Network
 
         private void OnDisable()
         {
-            FlyResultHandler.PlayerFlightEnded -= OnPlayerFlightCompleted;
+            FlightResultHandler.PlayerFlightEnded -= OnPlayerFlightCompleted;
         }
     }
 
