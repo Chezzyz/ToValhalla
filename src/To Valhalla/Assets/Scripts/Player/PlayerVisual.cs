@@ -1,23 +1,26 @@
-using UnityEngine;
 using Input;
+using UnityEngine;
 
-public class PlayerVisual : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private SpriteRenderer _playerRenderer;
-    [SerializeField] private PlayerScriptableData _currentPlayer;
-
-    private void OnEnable()
+    public class PlayerVisual : MonoBehaviour
     {
-        ThrowScalesController.ThrowStarted += OnThrowStarted;
-    }
+        [SerializeField] private SpriteRenderer _playerRenderer;
+        [SerializeField] private PlayerScriptableData _currentPlayer;
 
-    private void OnDisable()
-    {
-        ThrowScalesController.ThrowStarted -= OnThrowStarted;
-    }
+        private void OnEnable()
+        {
+            ThrowScalesController.ThrowStarted += OnThrowStarted;
+        }
 
-    private void OnThrowStarted(float arg1, float arg2)
-    {
-        _playerRenderer.sprite = _currentPlayer.GetFlyingSprite();
+        private void OnDisable()
+        {
+            ThrowScalesController.ThrowStarted -= OnThrowStarted;
+        }
+
+        private void OnThrowStarted(float arg1, float arg2)
+        {
+            _playerRenderer.sprite = _currentPlayer.GetFlyingSprite();
+        }
     }
 }

@@ -27,10 +27,10 @@ namespace View
         {
             _targetCanvas.enabled = true;
 
-            _heightText.text = flightData.flyHeight.ToString() + " m";
-            _coinsText.text = flightData.flyCoinsCount.ToString();
-            _artifactsText.text = flightData.artifactsCount.ToString();
-            _keysText.text = flightData.keysCount.ToString();
+            _heightText.text = flightData.FlyHeight.ToString() + " m";
+            _coinsText.text = flightData.FlyCoinsCount.ToString();
+            _artifactsText.text = flightData.ArtifactsCount.ToString();
+            _keysText.text = flightData.KeysCount.ToString();
         }
     }
 }

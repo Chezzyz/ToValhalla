@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6633374098845253809}
   - component: {fileID: 6633374098845253808}
   - component: {fileID: 6633374098845253807}
+  - component: {fileID: 5388750911362465108}
   m_Layer: 5
   m_Name: btn_HammerChoice
   m_TagString: Untagged
@@ -122,6 +123,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5388750911362465108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633374098845253805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d5224b38c844e0a5378c61f870d10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemSprite: {fileID: 6633374098845253808}
+  _button: {fileID: 6633374098845253807}
+  _artifactIcon: {fileID: 0}
 --- !u!1 &6633374098865901981
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +190,7 @@ GameObject:
   - component: {fileID: 6633374098877876951}
   - component: {fileID: 6633374098877876950}
   - component: {fileID: 6633374098877876949}
+  - component: {fileID: 1743872940127869135}
   m_Layer: 5
   m_Name: btn_ArtifactChoice (2)
   m_TagString: Untagged
@@ -284,6 +301,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1743872940127869135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633374098877876947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d5224b38c844e0a5378c61f870d10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemSprite: {fileID: 6633374098877876950}
+  _button: {fileID: 6633374098877876949}
+  _artifactIcon: {fileID: 21300000, guid: d57b126176a9cba4d8983bfe8e21e9da, type: 3}
 --- !u!1 &6633374098921724759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,6 +1069,7 @@ GameObject:
   - component: {fileID: 6633374099153724159}
   - component: {fileID: 6633374099153724158}
   - component: {fileID: 6633374099153724157}
+  - component: {fileID: 4110916608304274702}
   m_Layer: 5
   m_Name: btn_ArtifactChoice (1)
   m_TagString: Untagged
@@ -1147,6 +1180,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4110916608304274702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633374099153724155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d5224b38c844e0a5378c61f870d10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemSprite: {fileID: 6633374099153724158}
+  _button: {fileID: 6633374099153724157}
+  _artifactIcon: {fileID: 21300000, guid: d57b126176a9cba4d8983bfe8e21e9da, type: 3}
 --- !u!1 &6633374099220796219
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,6 +2026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6633374099911784458}
+  - component: {fileID: 1771600405737559221}
   m_Layer: 5
   m_Name: grp_Items
   m_TagString: Untagged
@@ -2008,6 +2057,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 85}
   m_SizeDelta: {x: 450, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1771600405737559221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633374099911784457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9878de19cace41889985e4a69bc8c8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _equippedHammerCell: {fileID: 5388750911362465108}
+  _firstEquippedArtifactCell: {fileID: 4110916608304274702}
+  _secondEquippedArtifactCell: {fileID: 1743872940127869135}
 --- !u!1 &6633374099984043924
 GameObject:
   m_ObjectHideFlags: 0
