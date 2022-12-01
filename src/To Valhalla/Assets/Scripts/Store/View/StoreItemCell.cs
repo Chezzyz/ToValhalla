@@ -33,23 +33,36 @@ namespace Store.View
         private void OnEnable()
         {
             EquippedItemsHandler.ItemEquipped += OnItemEquipped;
+            StoreHandler.ItemBought += OnItemBought;
             EquippedItemsHandler.ArtifactUnequipped += OnArtifactUnequipped;
+        }
+
+        private void OnItemBought(IStoreItem item)
+        {
+            _cellSprite.sprite = GetCorrectCellSprite(_item);
         }
 
         private void OnArtifactUnequipped(IStoreItem artifact)
         {
-            _cellSprite.sprite = artifact == _item ? _activeCellSprite : _cellSprite.sprite;
+            _cellSprite.sprite = GetCorrectCellSprite(_item);
         }
 
         private void OnItemEquipped(IStoreItem equipped)
         {
-            _cellSprite.sprite = equipped == _item ? _equippedSprite : _cellSprite.sprite;
+            _cellSprite.sprite = GetCorrectCellSprite(_item);
         }
+
+        private Sprite GetCorrectCellSprite(IStoreItem item)
+        { 
+            return item is null ? _inactiveCellSprite : 
+                item.IsEquipped() ? _equippedSprite :
+                item.IsBought() ? _activeCellSprite : _inactiveCellSprite;
+        } 
 
         public void Fill(IStoreItem item)
         {
-            _cellSprite.sprite = item.IsEquipped() ? _equippedSprite : item.IsBought() ? _activeCellSprite : _inactiveCellSprite;
             _item = item;
+            _cellSprite.sprite = GetCorrectCellSprite(_item);
             _itemSprite.sprite = item.GetSprite();
 
             SetSelfButton();

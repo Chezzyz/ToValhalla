@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: ArtifactShield
   _description: 
-  _sprite: {fileID: 21300000, guid: a09668d51f7a7304f9911dabaa0fd6b6, type: 3}
+  _sprite: {fileID: 21300000, guid: e6d6b3e77849321428e51485f5ea0b3a, type: 3}
   _coinsCost: 1
   _artifactPiecesCost: 1
   _artifactEffect: 0

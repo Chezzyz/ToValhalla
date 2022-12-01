@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0dd1f2d83dd7e24ab2441a262caf81d, type: 3}
   m_Name: HeavyHummer
   m_EditorClassIdentifier: 
-  _name: HeavyHummer
+  _name: Heavy Hammer
   _description: Very heavy
-  _sprite: {fileID: 21300000, guid: e7b1694e0d581bc44b37e33f6a853ae0, type: 3}
+  _sprite: {fileID: 21300000, guid: 2c592ab502538e4438aaf0d2e8b06a7e, type: 3}
   _cost: 1000
   _weight: 1
   _hammerType: 1

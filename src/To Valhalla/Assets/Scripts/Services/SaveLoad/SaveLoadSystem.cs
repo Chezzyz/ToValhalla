@@ -22,6 +22,12 @@ namespace Services.SaveLoad
             FlightResultHandler.PlayerFlightEnded += OnFlightEnded;
             StoreHandler.ItemBought += OnItemBought;
             EquippedItemsHandler.ItemEquipped += OnItemEquipped;
+            SceneLoader.SceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(string obj)
+        {
+            Invoke(nameof(Load), 0.5f);
         }
 
         private void OnItemEquipped(IStoreItem obj)
@@ -237,6 +243,7 @@ namespace Services.SaveLoad
             FlightResultHandler.PlayerFlightEnded -= OnFlightEnded;
             StoreHandler.ItemBought -= OnItemBought;
             EquippedItemsHandler.ItemEquipped -= OnItemEquipped;
+            SceneLoader.SceneLoaded -= OnSceneLoaded;
         }
         
         [Button]

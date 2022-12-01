@@ -86,8 +86,11 @@ namespace Store.View
         private void SetupArtifactsEquipButtons(IStoreItem item)
         {
             SetActiveArtifactsButtons(true);
+            _firstArtifactButton.onClick.RemoveAllListeners();
             _firstArtifactButton.onClick.AddListener(() => ArtifactsTryToEquip?.Invoke(item, 0));
+            _secondArtifactButton.onClick.RemoveAllListeners();
             _secondArtifactButton.onClick.AddListener(() => ArtifactsTryToEquip?.Invoke(item, 1));
+            _unselectArtifactButton.onClick.RemoveAllListeners();
             _unselectArtifactButton.onClick.AddListener(() =>
             {
                 ArtifactsTryToEquip?.Invoke(item, -1);

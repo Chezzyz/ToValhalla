@@ -38,6 +38,8 @@ namespace Artifacts
         public bool CanBuy() => CurrencyHandler.Instance.CoinsCount >= _coinsCost 
             && CurrencyHandler.Instance.ArtifactPiecesCount >= _artifactPiecesCost;
         public bool IsBought() => _isBought;
+        public bool IsEquipped() => EquippedItemsHandler.Instance.GetFirstArtifact() == this ||
+                   EquippedItemsHandler.Instance.GetSecondArtifact() == this;
         public StoreItemType GetStoreItemType() => StoreItemType.Artifact;
         #endregion
 

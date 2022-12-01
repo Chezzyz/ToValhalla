@@ -6,8 +6,8 @@ namespace Store
 {
     public class CurrencyHandler : BaseGameHandler<CurrencyHandler>
     {
-        public int CoinsCount { get; private set; } = 100;
-        public int ArtifactPiecesCount { get; private set; } = 100;
+        public int CoinsCount { get; private set; } = 100000;
+        public int ArtifactPiecesCount { get; private set; } = 100000;
         
         public int CoinValueMultiplier { get; private set; } = 1;
         

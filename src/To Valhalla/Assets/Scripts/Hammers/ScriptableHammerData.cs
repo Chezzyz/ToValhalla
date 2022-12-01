@@ -37,6 +37,7 @@ namespace Hammers
         public void Reset() => _isBought = false;
         public bool CanBuy() => CurrencyHandler.Instance.CoinsCount >= _cost;
         public bool IsBought() => _isBought;
+        public bool IsEquipped() => EquippedItemsHandler.Instance.GetHammer() == this;
         public StoreItemType GetStoreItemType() => StoreItemType.Hammer;
         #endregion
 

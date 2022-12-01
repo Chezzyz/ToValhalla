@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: OrangeBeardViking
   m_EditorClassIdentifier: 
   _skinName: OrangeBeardViking
+  _description: 
+  _coinsCost: 0
   _idleSprite: {fileID: 21300000, guid: 6bddcc0d9e7bfb546931fc7e2decd5f8, type: 3}
-  _flyingSprite: {fileID: 21300000, guid: f4bae818f0b5ac3489387407dc6aeafa, type: 3}
+  _flyingSprite: {fileID: 21300000, guid: b55c19b9c93cd394ab58be8753ba52e2, type: 3}

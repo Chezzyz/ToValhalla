@@ -10,7 +10,6 @@ namespace Player
         [Header("Store")] 
         [SerializeField] private string _skinName;
         [SerializeField] private string _description;
-        [SerializeField] private Sprite _sprite;
         [SerializeField] private int _coinsCost;
         [Header("View")]
         [ShowAssetPreview]
@@ -25,12 +24,13 @@ namespace Player
         public string GetDescription() => _description;
         public int GetCoinCost() => _coinsCost;
         public int GetArtifactPiecesCost() => 0;
-        public Sprite GetSprite() => _sprite;
+        public Sprite GetSprite() => _idleSprite;
         public void Buy() => _isBought = true;
         public void Reset() => _isBought = false;
         public bool CanBuy() => CurrencyHandler.Instance.CoinsCount >= _coinsCost;
         public bool IsBought() => _isBought;
-        public StoreItemType GetStoreItemType() => StoreItemType.Artifact;
+        public bool IsEquipped() => EquippedItemsHandler.Instance.EquippedSkin == this;
+        public StoreItemType GetStoreItemType() => StoreItemType.Skin;
         #endregion
         
         public Sprite GetIdleSprite() => _idleSprite; 

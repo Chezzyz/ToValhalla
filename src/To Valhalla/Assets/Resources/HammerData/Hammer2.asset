@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0dd1f2d83dd7e24ab2441a262caf81d, type: 3}
   m_Name: Hammer2
   m_EditorClassIdentifier: 
-  _name: Hammer2
+  _name: Stone Hammer
   _description: Middle
-  _sprite: {fileID: 21300000, guid: 2f25698ef7be81b4b9d2cf619755765a, type: 3}
+  _sprite: {fileID: 21300000, guid: f9c6d11a22ed3b44991070d5e2f42167, type: 3}
   _cost: 1000
   _weight: 1
   _hammerType: 1
