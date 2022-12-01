@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using OffScreenIndicators;
+using UnityEngine;
 
 public class OffScreenTargetObject : MonoBehaviour
 {

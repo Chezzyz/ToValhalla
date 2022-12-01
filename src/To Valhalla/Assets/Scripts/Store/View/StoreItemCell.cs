@@ -1,4 +1,6 @@
 ﻿using System;
+using Artifacts;
+using Hammers;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,10 +11,14 @@ namespace Store.View
     public class StoreItemCell : MonoBehaviour
     {
         [SerializeField] private Image _itemSprite;
+        [SerializeField] private Image _cellSprite;
         [SerializeField] private Button _button;
         [SerializeField] private Sprite _hammerIcon;
         [SerializeField] private Sprite _artifactIcon;
         [SerializeField] private Sprite _skinIcon;
+        [SerializeField] private Sprite _activeCellSprite;
+        [SerializeField] private Sprite _inactiveCellSprite;
+        [SerializeField] private Sprite _equippedSprite;
 
         private SelectedItemWindow _itemWindow;
         private StoreFiller _storeFiller;
@@ -24,8 +30,25 @@ namespace Store.View
             _storeFiller = FindObjectOfType<StoreFiller>(true);
         }
 
+        private void OnEnable()
+        {
+            EquippedItemsHandler.ItemEquipped += OnItemEquipped;
+            EquippedItemsHandler.ArtifactUnequipped += OnArtifactUnequipped;
+        }
+
+        private void OnArtifactUnequipped(IStoreItem artifact)
+        {
+            _cellSprite.sprite = artifact == _item ? _activeCellSprite : _cellSprite.sprite;
+        }
+
+        private void OnItemEquipped(IStoreItem equipped)
+        {
+            _cellSprite.sprite = equipped == _item ? _equippedSprite : _cellSprite.sprite;
+        }
+
         public void Fill(IStoreItem item)
         {
+            _cellSprite.sprite = item.IsEquipped() ? _equippedSprite : item.IsBought() ? _activeCellSprite : _inactiveCellSprite;
             _item = item;
             _itemSprite.sprite = item.GetSprite();
 
@@ -53,6 +76,12 @@ namespace Store.View
                 _itemWindow.gameObject.SetActive(true);
                 _itemWindow.SetupWindow(_item);
             });
+        }
+
+        private void OnDisable()
+        {
+            EquippedItemsHandler.ItemEquipped -= OnItemEquipped;
+            EquippedItemsHandler.ArtifactUnequipped -= OnArtifactUnequipped;
         }
     }
 }

@@ -1,6 +1,9 @@
 using System;
 
-public abstract class BaseArtifactEffect
-{ 
-    public abstract Action<ArtifactEffectApplier> GetEffect();
+namespace Artifacts.Effects
+{
+    public abstract class BaseArtifactEffect
+    { 
+        public abstract Action<ArtifactEffectApplier> GetEffect();
+    }
 }

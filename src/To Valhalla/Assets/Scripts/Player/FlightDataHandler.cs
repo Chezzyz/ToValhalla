@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using Level;
+using Store;
 
 namespace Player
 {
@@ -11,8 +12,6 @@ namespace Player
 
         public int FlightCoins { get; private set; } 
         public int FlightArtifactPieces { get; private set; }
-
-        public int CoinValueMultiplier { get; private set; } = 1;
 
         private void Start()
         {
@@ -37,7 +36,6 @@ namespace Player
 
         public int GetCurrentMaxFlightHeight() => _playerFlightData.GetCurrentMaxFlightHeight();
         public float GetCurrentFlightTime() => _playerFlightData.GetCurrentFlightTime();
-        public void SetCoinValueMultiplier(int value) => CoinValueMultiplier = value;
 
         private void OnArtifactPieceCollected()
         {
@@ -46,7 +44,7 @@ namespace Player
 
         private void OnCoinCollected()
         {
-            IncreaseFlightCoins(1 * CoinValueMultiplier);
+            IncreaseFlightCoins(1 * CurrencyHandler.Instance.CoinValueMultiplier);
         }
 
         private void OnThrowCompleted()

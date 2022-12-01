@@ -1,6 +1,6 @@
 using System;
 
-namespace Artifacts
+namespace Artifacts.Effects
 {
     public class DoubleMoneyEffect : BaseArtifactEffect
     {

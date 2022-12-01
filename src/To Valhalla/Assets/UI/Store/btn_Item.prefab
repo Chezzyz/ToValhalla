@@ -145,7 +145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3e030c39b190adf48b0f8213b0840df0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2c467cd0cc71a146bf76f85ef26b00a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -212,7 +212,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSprite: {fileID: 200043032}
+  _cellSprite: {fileID: 5227876586554824352}
   _button: {fileID: 5227876586554824353}
   _hammerIcon: {fileID: 21300000, guid: 99be3757c4347144b9e0eaa2aa699838, type: 3}
   _artifactIcon: {fileID: 21300000, guid: d57b126176a9cba4d8983bfe8e21e9da, type: 3}
   _skinIcon: {fileID: 21300000, guid: e3adc6e577a8f9e4f8e5921c5dafa814, type: 3}
+  _activeCellSprite: {fileID: 21300000, guid: 3e030c39b190adf48b0f8213b0840df0, type: 3}
+  _inactiveCellSprite: {fileID: 21300000, guid: a2c467cd0cc71a146bf76f85ef26b00a, type: 3}
+  _equippedSprite: {fileID: 21300000, guid: 3387e236dbdec6f4eb69e45cf5e2bf80, type: 3}

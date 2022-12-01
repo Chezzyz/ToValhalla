@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Artifacts;
+using Hammers;
+using UnityEngine;
 
 namespace Store
 {
@@ -17,6 +19,15 @@ namespace Store
         StoreItemType GetStoreItemType();
 
         bool IsBought();
+        
+        public bool IsEquipped()
+        {
+            return GetStoreItemType() == StoreItemType.Hammer &&
+                   EquippedItemsHandler.Instance.GetHammer() == (ScriptableHammerData)this
+                   || GetStoreItemType() == StoreItemType.Artifact &&
+                   (EquippedItemsHandler.Instance.GetFirstArtifact() == (ScriptableArtifactData)this ||
+                    EquippedItemsHandler.Instance.GetSecondArtifact() == (ScriptableArtifactData)this);
+        }
 
         void Buy();
 

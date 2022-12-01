@@ -71,8 +71,8 @@ namespace Store
         {
             if (item.CanBuy())
             {
-                CurrencyHandler.Instance.SubtractCoins(item.GetCoinCost());
-                CurrencyHandler.Instance.SubtractArtifactsPieces(item.GetArtifactPiecesCost());
+                CurrencyHandler.Instance.ChangeCoins(-item.GetCoinCost());
+                CurrencyHandler.Instance.ChangeArtifactPiece(-item.GetArtifactPiecesCost());
                 item.Buy();
                 ItemBought?.Invoke(item);
             }

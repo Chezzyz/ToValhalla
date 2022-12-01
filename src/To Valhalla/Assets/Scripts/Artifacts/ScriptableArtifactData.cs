@@ -1,6 +1,7 @@
 using Store;
 using System.Collections;
 using System.Collections.Generic;
+using Artifacts.Effects;
 using UnityEngine;
 
 namespace Artifacts

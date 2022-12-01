@@ -1,31 +1,31 @@
-﻿using Level;
+﻿using Store;
 using TMPro;
 using UnityEngine;
-using Player;
 
 namespace View
 {
     public class CoinsHandler : MonoBehaviour
     {
         [SerializeField] private TMP_Text _text;
-        [SerializeField] private FlightDataHandler _flightDataHandler;
-
-        private int _count;
 
         private void OnEnable()
         {
-            Coin.CoinCollected += OnCoinCollected;
+            CurrencyHandler.CoinsCountChanged += OnCoinsCountChanged;
+        }
+        
+        private void Start()
+        {
+            _text.text = CurrencyHandler.Instance.CoinsCount.ToString();
         }
 
-        private void OnCoinCollected()
+        private void OnCoinsCountChanged(int count)
         {
-            _count += 1 * _flightDataHandler.CoinValueMultiplier;
-            _text.text = _count.ToString();
+            _text.text = count.ToString();
         }
 
         private void OnDisable()
         {
-            Coin.CoinCollected -= OnCoinCollected;
+            CurrencyHandler.CoinsCountChanged -= OnCoinsCountChanged;
         }
     }
 }

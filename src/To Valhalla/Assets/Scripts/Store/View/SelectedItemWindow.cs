@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Artifacts;
 using Hammers;
 using TMPro;
 using UnityEngine;
@@ -37,13 +38,21 @@ namespace Store.View
         private void OnEnable()
         {
             StoreHandler.ItemBought += OnItemBought;
+            EquippedItemsHandler.ItemEquipped += OnItemEquipped;
+        }
+
+        private void OnItemEquipped(IStoreItem obj)
+        {
+            if (_currentItem.GetStoreItemType() is StoreItemType.Hammer or StoreItemType.Skin) _button.interactable = false;
+            if (_currentItem.GetStoreItemType() is StoreItemType.Artifact) SetupArtifactsEquipButtons(obj);
         }
 
         private void OnItemBought(IStoreItem item)
         {
             if (_currentItem == item)
             {
-                SetupButtonAsEquip(item);
+                if(item.GetStoreItemType() is StoreItemType.Artifact) SetupArtifactsEquipButtons(item);
+                else SetupButtonAsEquip(item);
             }
         }
 
@@ -54,12 +63,14 @@ namespace Store.View
             _itemSprite.sprite = item.GetSprite();
             _currentItem = item;
             SetupButtons(item);
-            if (item.GetStoreItemType() is StoreItemType.Hammer)
-                SetupScales(item as ScriptableHammerData);
+            
+            if (item.GetStoreItemType() is StoreItemType.Hammer) SetupScales(item as ScriptableHammerData);
+            else _scaleView.gameObject.SetActive(false);
         }
 
         private void SetupScales(ScriptableHammerData hammerData)
         {
+            _scaleView.gameObject.SetActive(true);
             _scaleView.SetScaleSectors(Image.Origin360.Top, 0f, hammerData.GetScalePartsInPercent().ToList());
         }
 
@@ -81,7 +92,11 @@ namespace Store.View
             SetActiveArtifactsButtons(true);
             _firstArtifactButton.onClick.AddListener(() => ArtifactsTryToEquip?.Invoke(item, 0));
             _secondArtifactButton.onClick.AddListener(() => ArtifactsTryToEquip?.Invoke(item, 1));
-            _unselectArtifactButton.onClick.AddListener(() => ArtifactsTryToEquip?.Invoke(item, -1));
+            _unselectArtifactButton.onClick.AddListener(() =>
+            {
+                ArtifactsTryToEquip?.Invoke(item, -1);
+                SetupArtifactsEquipButtons(item);
+            });
         }
 
         private void SetActiveArtifactsButtons(bool state)
@@ -89,13 +104,13 @@ namespace Store.View
             _button.gameObject.SetActive(!state);
 
             _firstArtifactButton.gameObject.SetActive(state);
-            _firstArtifactButton.GetComponentInChildren<Image>(true).sprite
+            _firstArtifactButton.GetComponentInChildren<ButtonIcon>(true).GetComponent<Image>().sprite
                 = _itemsHandler.GetFirstArtifact() == null
                     ? _artifactIcon
                     : _itemsHandler.GetFirstArtifact().GetSprite();
 
             _secondArtifactButton.gameObject.SetActive(state);
-            _secondArtifactButton.GetComponentInChildren<Image>(true).sprite
+            _secondArtifactButton.GetComponentInChildren<ButtonIcon>(true).GetComponent<Image>().sprite
                 = _itemsHandler.GetSecondArtifact() == null
                     ? _artifactIcon
                     : _itemsHandler.GetSecondArtifact().GetSprite();
@@ -118,7 +133,7 @@ namespace Store.View
         private void SetupButtonAsEquip(IStoreItem item)
         {
             SetActiveArtifactsButtons(false);
-            _button.interactable = true;
+            _button.interactable = !item.IsEquipped();
             _buttonEquipText.enabled = true;
             _costText.enabled = false;
             _currencySprite.enabled = false;
@@ -129,6 +144,7 @@ namespace Store.View
         private void OnDisable()
         {
             StoreHandler.ItemBought -= OnItemBought;
+            EquippedItemsHandler.ItemEquipped -= OnItemEquipped;
         }
     }
 }

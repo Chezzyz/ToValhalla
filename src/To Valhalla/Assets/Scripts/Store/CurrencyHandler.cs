@@ -1,15 +1,21 @@
 ﻿using System;
 using Level;
 using Services;
-using UnityEngine;
 
 namespace Store
 {
     public class CurrencyHandler : BaseGameHandler<CurrencyHandler>
     {
         public int CoinsCount { get; private set; } = 100;
-
         public int ArtifactPiecesCount { get; private set; } = 100;
+        
+        public int CoinValueMultiplier { get; private set; } = 1;
+        
+        public int ArtifactPieceValueMultiplier { get; private set; } = 1;
+
+        public static event Action<int> CoinsCountChanged;
+        public static event Action<int> ArtifactPiecesCountChanged;
+
 
         private void OnEnable()
         {
@@ -17,35 +23,32 @@ namespace Store
             ArtifactPiece.ArtifactPieceCollected += OnArtifactPieceCollected;
         }
 
-        public void SubtractCoins(int value)
-        {
-            CoinsCount -= value;
-        }
-
-        public void SubtractArtifactsPieces(int value)
-        {
-            ArtifactPiecesCount -= value;
-        }
-
         private void OnCoinCollected()
         {
-            AddCoins(1);
+            ChangeCoins(1 * CoinValueMultiplier);
         }
 
-        private void AddCoins(int value)
+        public void ChangeCoins(int value)
         {
             CoinsCount += value;
+            CoinsCountChanged?.Invoke(CoinsCount);
         }
 
         private void OnArtifactPieceCollected()
         {
-            AddArtifactPiece(1);
+            ChangeArtifactPiece(1 * ArtifactPieceValueMultiplier);
         }
 
-        private void AddArtifactPiece(int value)
+        public void ChangeArtifactPiece(int value)
         {
             ArtifactPiecesCount += value;
+            ArtifactPiecesCountChanged?.Invoke(ArtifactPiecesCount);
         }
+        
+        public void SetCoinValueMultiplier(int value) => CoinValueMultiplier = value;
+
+        public void SecArtifactPieceValueMultiplier(int value) => ArtifactPieceValueMultiplier = value;
+
         
         private void OnDisable()
         {
