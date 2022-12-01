@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class TargetIndicator : MonoBehaviour
 {
-    [SerializeField] private Image _targetIndicatorImage;
+    [SerializeField] private Image _targetImage;
+    [SerializeField] private Image _inSightTargetIndicatorImage;
     [SerializeField] private RectTransform _offScreenTargetIndicator;
     [SerializeField] private float _outOfSightOffset = 20f;
 
@@ -21,8 +22,9 @@ public class TargetIndicator : MonoBehaviour
     }
 
 
-    public void InitTargetIndicator(GameObject target, Camera mainCamera, Canvas canvas)
+    public void InitTargetIndicator(GameObject target, Camera mainCamera, Canvas canvas, Sprite targetSprite)
     {
+        _targetImage.sprite = targetSprite;
         this.target = target;
         this.mainCamera = mainCamera;
         canvasRect = canvas.GetComponent<RectTransform>();
@@ -31,10 +33,15 @@ public class TargetIndicator : MonoBehaviour
     public void UpdateTargetIndicator()
     {
         SetIndicatorPosition();
-
+        SetInnerTargetImageRotation(_targetImage);
         //Adjust distance display
         //Turn on or off when in range/out of range
         //Do stuff if picked as main target
+    }
+
+    private void SetInnerTargetImageRotation(Image targetImage)
+    {
+        targetImage.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
 
@@ -126,8 +133,8 @@ public class TargetIndicator : MonoBehaviour
             if (_offScreenTargetIndicator.gameObject.activeSelf == false) 
                 _offScreenTargetIndicator.gameObject.SetActive(true);
 
-            if (_targetIndicatorImage.isActiveAndEnabled == true) 
-                _targetIndicatorImage.enabled = false;
+            if (_inSightTargetIndicatorImage.isActiveAndEnabled == true) 
+                _inSightTargetIndicatorImage.enabled = false;
 
             //Set the rotation of the OutOfSight direction indicator
             _offScreenTargetIndicator.rotation = Quaternion.Euler(RotationOutOfSightTargetindicator(indicatorPosition));
@@ -146,8 +153,8 @@ public class TargetIndicator : MonoBehaviour
             if (_offScreenTargetIndicator.gameObject.activeSelf == true) 
                 _offScreenTargetIndicator.gameObject.SetActive(false);
 
-            if (_targetIndicatorImage.isActiveAndEnabled == false) 
-                _targetIndicatorImage.enabled = true;
+            if (_inSightTargetIndicatorImage.isActiveAndEnabled == false) 
+                _inSightTargetIndicatorImage.enabled = true;
         }
     }
 

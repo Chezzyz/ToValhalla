@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Artifacts.Effects;
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace Artifacts
 {
@@ -12,6 +13,7 @@ namespace Artifacts
         [Header("Store")] 
         [SerializeField] private string _name;
         [SerializeField] private string _description;
+        [ShowAssetPreview]
         [SerializeField] private Sprite _sprite;
         [SerializeField] private int _coinsCost;
         [SerializeField] private int _artifactPiecesCost;
