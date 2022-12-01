@@ -47,7 +47,7 @@ namespace Store
         
         public void SetCoinValueMultiplier(int value) => CoinValueMultiplier = value;
 
-        public void SecArtifactPieceValueMultiplier(int value) => ArtifactPieceValueMultiplier = value;
+        public void SetArtifactPieceValueMultiplier(int value) => ArtifactPieceValueMultiplier = value;
 
         
         private void OnDisable()

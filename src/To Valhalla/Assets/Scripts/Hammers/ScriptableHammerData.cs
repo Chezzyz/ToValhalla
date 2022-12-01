@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Store;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace Hammers
         public int GetArtifactPiecesCost() => 0;
         public Sprite GetSprite() => _sprite;
         public void Buy() => _isBought = true;
+        public void Reset() => _isBought = false;
         public bool CanBuy() => CurrencyHandler.Instance.CoinsCount >= _cost;
         public bool IsBought() => _isBought;
         public StoreItemType GetStoreItemType() => StoreItemType.Hammer;

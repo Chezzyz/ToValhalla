@@ -6,6 +6,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Player;
 using Player.Throws;
+using Services;
 using Store;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -15,8 +16,7 @@ namespace Network
     public class SessionDataUploader : MonoBehaviour
     {
         [SerializeField] private string _uri;
-        [SerializeField] private PlayerUuidHandler _uuidHandler;
-
+        
         private void OnEnable()
         {
             FlightResultHandler.PlayerFlightEnded += OnPlayerFlightCompleted;
@@ -29,21 +29,21 @@ namespace Network
 
         private IEnumerator SendData(FlightResultData flightData)
         {
-            SessionData data =  new (_uuidHandler.GetUuid(), "username", DateTime.Now,
-                    new TimeSpan(0, 0, 30, 0), TimeSpan.FromSeconds(flightData.FlyTime),
-                    flightData.FlyHeight, "Midgard", flightData.FlyCoinsCount, CurrencyHandler.Instance.CoinsCount, 
-                    1, 1, 1, new List<SessionData.Score>()
-                        { new ("Midgard", 100, 100, TimeSpan.FromSeconds(70)) });
+            SessionData data = new(NetworkPlayerHandler.Instance.GetPlayerId(), NetworkPlayerHandler.Instance.GetUsername(), DateTime.Now,
+                GameTimeHandler.Instance.GetGameTime(), TimeSpan.FromSeconds(flightData.FlyTime),
+                flightData.FlyHeight, "Midgard", flightData.FlyCoinsCount, CurrencyHandler.Instance.CoinsCount,
+                StoreItemsHandler.Instance.GetBoughtHammersCount(), StoreItemsHandler.Instance.GetBoughtSkinsCount(),
+                StoreItemsHandler.Instance.GetBoughtArtifactsCount(), new List<SessionData.Score>()
+                    { new("Midgard", 100, 100, TimeSpan.FromSeconds(70)) });
 
             string json = JsonConvert.SerializeObject(data);
-            
-            UnityWebRequest uwr = new (_uri, "POST");
+            UnityWebRequest uwr = new(_uri, "POST");
             uwr.SetRequestHeader("Content-Type", "application/json");
             uwr.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             yield return uwr.SendWebRequest();
-            
+
             Debug.Log($"Throw Completed, Send session data: {json}");
-            
+
             if (uwr.result == UnityWebRequest.Result.ConnectionError)
             {
                 Debug.Log($"Error While Sending: {uwr.error}");
@@ -52,7 +52,7 @@ namespace Network
             {
                 Debug.Log($"Data Sent: {json}");
             }
-            
+
             uwr.Dispose();
         }
 

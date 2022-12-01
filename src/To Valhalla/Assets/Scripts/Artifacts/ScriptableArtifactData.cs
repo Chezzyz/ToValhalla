@@ -32,6 +32,7 @@ namespace Artifacts
         public int GetArtifactPiecesCost() => _artifactPiecesCost;
         public Sprite GetSprite() => _sprite;
         public void Buy() => _isBought = true;
+        public void Reset() => _isBought = false;
         public bool CanBuy() => CurrencyHandler.Instance.CoinsCount >= _coinsCost 
             && CurrencyHandler.Instance.ArtifactPiecesCount >= _artifactPiecesCost;
         public bool IsBought() => _isBought;

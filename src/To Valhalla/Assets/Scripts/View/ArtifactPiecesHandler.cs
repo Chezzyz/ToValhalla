@@ -1,3 +1,5 @@
+using Services;
+using Services.SaveLoad;
 using Store;
 using TMPro;
 using UnityEngine;
@@ -11,9 +13,10 @@ namespace View
         private void OnEnable()
         {
             CurrencyHandler.ArtifactPiecesCountChanged += OnArtifactPiecesCountChanged;
+            SaveLoadSystem.SaveLoaded += OnSaveLoaded;
         }
 
-        private void Start()
+        private void OnSaveLoaded()
         {
             _text.text = CurrencyHandler.Instance.ArtifactPiecesCount.ToString();
         }
@@ -26,6 +29,7 @@ namespace View
         private void OnDisable()
         {
             CurrencyHandler.ArtifactPiecesCountChanged -= OnArtifactPiecesCountChanged;
+            SaveLoadSystem.SaveLoaded -= OnSaveLoaded;
         }
     }
 }

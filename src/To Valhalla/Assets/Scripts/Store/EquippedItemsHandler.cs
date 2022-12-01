@@ -11,7 +11,7 @@ namespace Store
         [SerializeField] private EquippedItemCell _equippedHammerCell;
         [SerializeField] private EquippedItemCell _firstEquippedArtifactCell;
         [SerializeField] private EquippedItemCell _secondEquippedArtifactCell;
-        
+
         public static event Action<IStoreItem> ItemEquipped;
         public static event Action<IStoreItem> ArtifactUnequipped;
 
@@ -21,6 +21,7 @@ namespace Store
         
         public void EquipItem(IStoreItem item)
         {
+            if(item is null) return;
             if (item.GetStoreItemType() is StoreItemType.Hammer)
             {
                 EquipHammer(item);
@@ -34,6 +35,7 @@ namespace Store
 
         public void EquipArtifact(IStoreItem item, int cellIndex)
         {
+            if(item is null) return;
             switch (cellIndex)
             {
                 case 0: EquipFirstArtifact(item); break;

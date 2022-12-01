@@ -71,6 +71,7 @@ namespace Store.View
         private void SetSelfButton()
         {
             _button.interactable = true;
+            _button.onClick.RemoveAllListeners();
             _button.onClick.AddListener(() =>
             {
                 _itemWindow.gameObject.SetActive(true);

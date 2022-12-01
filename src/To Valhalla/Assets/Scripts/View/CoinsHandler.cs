@@ -1,4 +1,6 @@
-﻿using Store;
+﻿using Services;
+using Services.SaveLoad;
+using Store;
 using TMPro;
 using UnityEngine;
 
@@ -11,13 +13,14 @@ namespace View
         private void OnEnable()
         {
             CurrencyHandler.CoinsCountChanged += OnCoinsCountChanged;
+            SaveLoadSystem.SaveLoaded += OnSaveLoaded;
         }
-        
-        private void Start()
+
+        private void OnSaveLoaded()
         {
             _text.text = CurrencyHandler.Instance.CoinsCount.ToString();
         }
-
+        
         private void OnCoinsCountChanged(int count)
         {
             _text.text = count.ToString();
@@ -26,6 +29,7 @@ namespace View
         private void OnDisable()
         {
             CurrencyHandler.CoinsCountChanged -= OnCoinsCountChanged;
+            SaveLoadSystem.SaveLoaded -= OnSaveLoaded;
         }
     }
 }

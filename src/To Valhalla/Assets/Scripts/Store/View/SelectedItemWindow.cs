@@ -19,15 +19,11 @@ namespace Store.View
         [SerializeField] private TMP_Text _buttonEquipText;
         [SerializeField] private Image _currencySprite;
         [SerializeField] private TMP_Text _costText;
-
-        [Header("Artifact Buttons")] [SerializeField]
-        private EquippedItemsHandler _itemsHandler;
-
+        [Header("Artifact Buttons")]
         [SerializeField] private Button _firstArtifactButton;
         [SerializeField] private Button _secondArtifactButton;
         [SerializeField] private Button _unselectArtifactButton;
         [SerializeField] private Sprite _artifactIcon;
-        [SerializeField] private Sprite _coinSprite;
 
         public static event Action<IStoreItem> ItemTryToBought;
         public static event Action<IStoreItem> ItemTryToEquip;
@@ -105,15 +101,15 @@ namespace Store.View
 
             _firstArtifactButton.gameObject.SetActive(state);
             _firstArtifactButton.GetComponentInChildren<ButtonIcon>(true).GetComponent<Image>().sprite
-                = _itemsHandler.GetFirstArtifact() == null
+                = EquippedItemsHandler.Instance.GetFirstArtifact() == null
                     ? _artifactIcon
-                    : _itemsHandler.GetFirstArtifact().GetSprite();
+                    : EquippedItemsHandler.Instance.GetFirstArtifact().GetSprite();
 
             _secondArtifactButton.gameObject.SetActive(state);
             _secondArtifactButton.GetComponentInChildren<ButtonIcon>(true).GetComponent<Image>().sprite
-                = _itemsHandler.GetSecondArtifact() == null
+                = EquippedItemsHandler.Instance.GetSecondArtifact() == null
                     ? _artifactIcon
-                    : _itemsHandler.GetSecondArtifact().GetSprite();
+                    : EquippedItemsHandler.Instance.GetSecondArtifact().GetSprite();
 
             _unselectArtifactButton.gameObject.SetActive(state);
         }
@@ -127,6 +123,8 @@ namespace Store.View
 
             _costText.text = item.GetCoinCost().ToString();
             _button.interactable = item.CanBuy();
+            
+            _button.onClick.RemoveAllListeners();
             _button.onClick.AddListener(() => ItemTryToBought?.Invoke(item));
         }
 
@@ -137,7 +135,8 @@ namespace Store.View
             _buttonEquipText.enabled = true;
             _costText.enabled = false;
             _currencySprite.enabled = false;
-
+            
+            _button.onClick.RemoveAllListeners();
             _button.onClick.AddListener(() => ItemTryToEquip?.Invoke(item));
         }
 

@@ -6,7 +6,7 @@ namespace Player
     public class VikingVisual : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _playerRenderer;
-        [SerializeField] private PlayerScriptableData _currentPlayer;
+        [SerializeField] private ScriptableSkinData _currentSkin;
 
         private void OnEnable()
         {
@@ -20,7 +20,7 @@ namespace Player
 
         private void OnThrowStarted(float arg1, float arg2)
         {
-            _playerRenderer.sprite = _currentPlayer.GetFlyingSprite();
+            _playerRenderer.sprite = _currentSkin.GetFlyingSprite();
         }
     }
 }

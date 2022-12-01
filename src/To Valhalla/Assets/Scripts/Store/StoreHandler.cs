@@ -7,16 +7,11 @@ namespace Store
 {
     public class StoreHandler : MonoBehaviour
     {
-        [SerializeField] private EquippedItemsHandler _equippedItemsHandler;
-
         [Header("Section Buttons")] [SerializeField]
         private Button _hammersSectionButton;
 
         [SerializeField] private Button _artifactsSectionButton;
         [SerializeField] private Button _skinsSectionButton;
-        
-        
-
 
         public static event Action<StoreItemType> StoreSectionButtonPressed;
         public static event Action<IStoreItem> ItemBought;
@@ -52,19 +47,18 @@ namespace Store
 
         private void OpenSection(StoreItemType itemType)
         {
-            
             StoreSectionButtonPressed?.Invoke(itemType);
         }
         
 
         private void EquipArtifact(IStoreItem item, int cellIndex)
         {
-            _equippedItemsHandler.EquipArtifact(item, cellIndex);
+            EquippedItemsHandler.Instance.EquipArtifact(item, cellIndex);
         }
 
         private void EquipItem(IStoreItem item)
         {
-            _equippedItemsHandler.EquipItem(item);
+            EquippedItemsHandler.Instance.EquipItem(item);
         }
 
         private void TryBuyItem(IStoreItem item)

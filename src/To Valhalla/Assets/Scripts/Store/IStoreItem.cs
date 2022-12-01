@@ -31,6 +31,8 @@ namespace Store
 
         void Buy();
 
+        void Reset();
+
         bool CanBuy();
     }
 

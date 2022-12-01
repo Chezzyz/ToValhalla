@@ -6,11 +6,6 @@ namespace Artifacts
 {
     public class ArtifactEffectApplier : MonoBehaviour
     {
-        [SerializeField] private EquippedItemsHandler _equippedItemsHandler;
-
-        // [Header("Appliers")]
-
-
         private void OnEnable()
         {
             StartSessionHandler.SessionStarted += OnSessionStarted;
@@ -23,8 +18,8 @@ namespace Artifacts
 
         private void OnSessionStarted()
         {
-            ApplyEffects(_equippedItemsHandler.GetFirstArtifact() as ScriptableArtifactData, 
-                _equippedItemsHandler.GetSecondArtifact() as ScriptableArtifactData);
+            ApplyEffects(EquippedItemsHandler.Instance.GetFirstArtifact() as ScriptableArtifactData, 
+                EquippedItemsHandler.Instance.GetSecondArtifact() as ScriptableArtifactData);
         }
 
         #region ApplierInterface
