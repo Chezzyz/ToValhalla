@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3932336d242aa4f85c72b8f5f0034e, type: 3}
+  m_Name: WomanViking
+  m_EditorClassIdentifier: 
+  _skinName: WomanViking
+  _idleSprite: {fileID: 21300000, guid: 73f24a11f9a9087449832f6ae2788fad, type: 3}
+  _flyingSprite: {fileID: 21300000, guid: f02268afb1e8c524abcee7890ca525bc, type: 3}

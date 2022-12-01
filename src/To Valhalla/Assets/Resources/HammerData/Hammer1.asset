@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0dd1f2d83dd7e24ab2441a262caf81d, type: 3}
-  m_Name: DefaultHammer
+  m_Name: Hammer1
   m_EditorClassIdentifier: 
   _name: Default hammer
   _description: default

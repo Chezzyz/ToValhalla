@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Store;
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace Hammers
 {
@@ -16,6 +17,7 @@ namespace Hammers
     {
         [Header("Store")] [SerializeField] private string _name;
         [SerializeField] private string _description;
+        [ShowAssetPreview]
         [SerializeField] private Sprite _sprite;
         [SerializeField] private int _cost;
         [Header("Model")] [SerializeField] private float _weight;

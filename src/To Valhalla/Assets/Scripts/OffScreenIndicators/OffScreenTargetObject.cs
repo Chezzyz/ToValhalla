@@ -1,18 +1,22 @@
 ﻿using OffScreenIndicators;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class OffScreenTargetObject : MonoBehaviour
 {
-    private OffScreenIndicatorsHandler ui = null;
+    [ShowAssetPreview]
+    [SerializeField] private Sprite _spriteToShow;
+
+    private OffScreenIndicatorsHandler offScreenIndicatorHandler = null;
 
     private void Awake()
     {
-        if(ui == null)
+        if(offScreenIndicatorHandler == null)
         {
-            ui = FindObjectOfType<OffScreenIndicatorsHandler>();
+            offScreenIndicatorHandler = FindObjectOfType<OffScreenIndicatorsHandler>();
         }
 
-        if (ui == null)
+        if (offScreenIndicatorHandler == null)
         {
             Debug.LogError("No IndicatorsController component found");
         }
@@ -20,13 +24,15 @@ public class OffScreenTargetObject : MonoBehaviour
         ShowIndicator();
     }
 
+    public Sprite GetSpriteToShow() => _spriteToShow;
+
     public void ShowIndicator()
     { 
-        ui.AddTargetIndicator(this);
+        offScreenIndicatorHandler.AddTargetIndicator(this);
     }
 
     public void HideIndicator()
     {
-        ui.RemoveTargetIndicator(this);
+        offScreenIndicatorHandler.RemoveTargetIndicator(this);
     }
 }
