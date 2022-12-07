@@ -9,10 +9,9 @@ namespace Level.Spawn
         [SerializeField] private int _count;
         [SerializeField] private SpawnGridCalculator _spawnGridCalculator;
 
-        public void Spawn()
+        public void Spawn(LevelSector sector)
         {
-            _spawnGridCalculator.SpawnObjects(_spawnablePref, Vector2Int.zero, _objectCellSize, _count,
-                transform);
+            _spawnGridCalculator.SpawnObjects(_spawnablePref, sector, _objectCellSize, _count);
         }
     }
 }

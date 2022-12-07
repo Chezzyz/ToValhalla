@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0dd1f2d83dd7e24ab2441a262caf81d, type: 3}
-  m_Name: MediumHummer
+  m_Name: Mjolnir
   m_EditorClassIdentifier: 
-  _name: Medium Hammer
-  _description: Really average hummer
-  _sprite: {fileID: 21300000, guid: 6f544e5a77c04404fac97d231c29fccb, type: 3}
-  _cost: 1000
-  _weight: 1
+  _name: Mjolnir
+  _description: Where is Tor?
+  _sprite: {fileID: 21300000, guid: 00eafd82f4abab84f9233a8230f1eba9, type: 3}
+  _cost: 3500
+  _weight: 3.5
   _hammerType: 1
   _scalePartsPercents:
-  - 25
-  - 45
+  - 20
+  - 55
+  - 10
   - 15
-  - 15
+  _scalePartsMultipliers:
+  - 1
+  - 1.25
+  - 1.75
+  - 0.5

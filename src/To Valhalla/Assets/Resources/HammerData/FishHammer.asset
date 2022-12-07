@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0dd1f2d83dd7e24ab2441a262caf81d, type: 3}
-  m_Name: Hammer1
+  m_Name: FishHammer
   m_EditorClassIdentifier: 
-  _name: Default hammer
-  _description: default
-  _sprite: {fileID: 21300000, guid: b214a9986830ca846b0862123d035e1e, type: 3}
-  _cost: 0
+  _name: Fish Hammer
+  _description: Fish?
+  _sprite: {fileID: 21300000, guid: 0d236d00c4ed3a646a12791fc9a4f204, type: 3}
+  _cost: 150
   _weight: 1
-  _hammerType: 0
+  _hammerType: 1
   _scalePartsPercents:
-  - 25
-  - 25
-  - 25
-  - 25
+  - 20
+  - 45
+  - 20
+  - 15
+  _scalePartsMultipliers:
+  - 1
+  - 1.25
+  - 1.75
+  - 0.5

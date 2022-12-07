@@ -66,7 +66,7 @@ namespace Store
             if (item.CanBuy())
             {
                 CurrencyHandler.Instance.ChangeCoins(-item.GetCoinCost());
-                CurrencyHandler.Instance.ChangeArtifactPiece(-item.GetArtifactPiecesCost());
+                CurrencyHandler.Instance.ChangeArtifactPieces(-item.GetArtifactPiecesCost());
                 item.Buy();
                 ItemBought?.Invoke(item);
             }

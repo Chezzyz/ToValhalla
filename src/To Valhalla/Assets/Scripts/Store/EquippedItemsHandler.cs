@@ -3,15 +3,16 @@ using Artifacts;
 using Hammers;
 using Player;
 using Services;
+using Store.View;
 using UnityEngine;
 
 namespace Store
 {
     public class EquippedItemsHandler : BaseGameHandler<EquippedItemsHandler>
     {
-        [SerializeField] private EquippedItemCell _equippedHammerCell;
-        [SerializeField] private EquippedItemCell _firstEquippedArtifactCell;
-        [SerializeField] private EquippedItemCell _secondEquippedArtifactCell;
+        private EquippedItemCell _equippedHammerCell;
+        private EquippedItemCell _firstEquippedArtifactCell;
+        private EquippedItemCell _secondEquippedArtifactCell;
 
         public static event Action<IStoreItem> ItemEquipped;
         public static event Action<IStoreItem> ArtifactUnequipped;
@@ -21,7 +22,24 @@ namespace Store
         public ScriptableHammerData GetHammer() => _equippedHammerCell.Item as ScriptableHammerData;
         
         public ScriptableSkinData EquippedSkin { get; private set; }
-        
+
+        private void OnEnable()
+        {
+            SceneLoader.SceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(string obj)
+        {
+            _equippedHammerCell = FindObjectOfType<EquippedHammerCell>().GetComponent<EquippedItemCell>();
+            _firstEquippedArtifactCell = FindObjectOfType<EquippedFirstArtifactCell>().GetComponent<EquippedItemCell>();
+            _secondEquippedArtifactCell = FindObjectOfType<EquippedSecondArtifactCell>().GetComponent<EquippedItemCell>();
+        }
+
+        private void OnDisable()
+        {
+            SceneLoader.SceneLoaded -= OnSceneLoaded;
+        }
+
         public void EquipItem(IStoreItem item)
         {
             if(item is null) return;

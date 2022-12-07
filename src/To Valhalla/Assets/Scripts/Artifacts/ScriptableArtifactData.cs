@@ -24,8 +24,11 @@ namespace Artifacts
         private bool _isBought;
 
         private readonly Dictionary<ArtifactEffect, BaseArtifactEffect> _artifactEffectsMap
-            = new Dictionary<ArtifactEffect, BaseArtifactEffect>()
-            { {ArtifactEffect.DoubleMoney, new DoubleMoneyEffect()} };
+            = new ()
+            {
+                {ArtifactEffect.DoubleMoney, new DoubleMoneyEffect()},
+                { ArtifactEffect.GreaterMagnet , new GreaterMagnetEffect()}
+            };
 
         #region StoreItem
         public string GetName() => _name;
@@ -48,6 +51,7 @@ namespace Artifacts
 
     public enum ArtifactEffect
     { 
-        DoubleMoney
+        DoubleMoney,
+        GreaterMagnet
     }
 }

@@ -23,7 +23,8 @@ namespace Hammers
         [SerializeField] private int _cost;
         [Header("Model")] [SerializeField] private float _weight;
         [SerializeField] private HammerType _hammerType;
-        [SerializeField] private List<float> _scalePartsPercents = new List<float>();
+        [SerializeField] private List<float> _scalePartsPercents = new();
+        [SerializeField] private List<float> _scalePartsMultipliers = new();
 
         private bool _isBought;
 
@@ -44,5 +45,21 @@ namespace Hammers
         public float GetWeight() => _weight;
         public HammerType GetHammerType() => _hammerType;
         public IReadOnlyCollection<float> GetScalePartsInPercent() => _scalePartsPercents;
+
+        public float GetPowerMultiplier(float power)
+        {
+            float lowZone = _scalePartsPercents[0];
+            float lowZoneMultiplier = _scalePartsMultipliers[0];
+            float mediumZone = _scalePartsPercents[1] + lowZone;
+            float mediumZoneMultiplier = _scalePartsMultipliers[1];
+            float highZone = _scalePartsPercents[2] + mediumZone;
+            float highZoneMultiplier = _scalePartsMultipliers[2];
+            float overZoneMultiplier = _scalePartsMultipliers[3];
+
+            return power < lowZone ? lowZoneMultiplier
+                : power < mediumZone ? mediumZoneMultiplier
+                : power < highZone ? highZoneMultiplier
+                : overZoneMultiplier;
+        }
     }
 }

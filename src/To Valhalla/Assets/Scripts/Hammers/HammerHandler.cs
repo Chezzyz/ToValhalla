@@ -40,5 +40,10 @@ namespace Hammers
         }
 
         public ScriptableHammerData GetCurrentHummerData() => _currentHammerData;
+        
+        private void OnDisable()
+        {
+            EquippedItemsHandler.ItemEquipped -= OnItemEquipped;
+        }
     }
 }

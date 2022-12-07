@@ -6,8 +6,8 @@ namespace Store
 {
     public class CurrencyHandler : BaseGameHandler<CurrencyHandler>
     {
-        public int CoinsCount { get; private set; } = 100000;
-        public int ArtifactPiecesCount { get; private set; } = 100000;
+        public int CoinsCount { get; private set; }
+        public int ArtifactPiecesCount { get; private set; }
         
         public int CoinValueMultiplier { get; private set; } = 1;
         
@@ -30,18 +30,28 @@ namespace Store
 
         public void ChangeCoins(int value)
         {
-            CoinsCount += value;
+            SetCoins(CoinsCount + value);
+        }
+
+        public void SetCoins(int value)
+        {
+            CoinsCount = value;
             CoinsCountChanged?.Invoke(CoinsCount);
         }
 
         private void OnArtifactPieceCollected()
         {
-            ChangeArtifactPiece(1 * ArtifactPieceValueMultiplier);
+            ChangeArtifactPieces(1 * ArtifactPieceValueMultiplier);
         }
 
-        public void ChangeArtifactPiece(int value)
+        public void ChangeArtifactPieces(int value)
         {
-            ArtifactPiecesCount += value;
+            SetArtifactPieces(ArtifactPiecesCount + value);
+        }
+
+        public void SetArtifactPieces(int value)
+        {
+            ArtifactPiecesCount = value;
             ArtifactPiecesCountChanged?.Invoke(ArtifactPiecesCount);
         }
         

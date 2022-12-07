@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0dd1f2d83dd7e24ab2441a262caf81d, type: 3}
-  m_Name: Hammer2
+  m_Name: ClownHammer
   m_EditorClassIdentifier: 
-  _name: Stone Hammer
-  _description: Middle
-  _sprite: {fileID: 21300000, guid: f9c6d11a22ed3b44991070d5e2f42167, type: 3}
-  _cost: 1000
-  _weight: 1
+  _name: Clown Hammer
+  _description: Clown hummer
+  _sprite: {fileID: 21300000, guid: dbfe1a0f443432143ae9dd98751d320d, type: 3}
+  _cost: 50
+  _weight: 0.6
   _hammerType: 1
   _scalePartsPercents:
-  - 25
-  - 45
   - 15
+  - 20
+  - 50
   - 15
+  _scalePartsMultipliers:
+  - 1
+  - 1.25
+  - 1.75
+  - 0.5

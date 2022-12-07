@@ -45,8 +45,8 @@ namespace Services.SaveLoad
         {
             return new Dictionary<string, Action<int>>
             {
-                { COINS_COUNT_ALIAS, (value) => CurrencyHandler.Instance.ChangeCoins(value) },
-                { ARTIFACT_PIECES_COUNT_ALIAS, (value) => CurrencyHandler.Instance.ChangeArtifactPiece(value) },
+                { COINS_COUNT_ALIAS, (value) => CurrencyHandler.Instance.SetCoins(value) },
+                { ARTIFACT_PIECES_COUNT_ALIAS, (value) => CurrencyHandler.Instance.SetArtifactPieces(value) },
                 //{ VOLUME_LEVEL_ALIAS, (value) => SettingsHandler.Instance.SetVolumeLevel(value) }
             };
         }

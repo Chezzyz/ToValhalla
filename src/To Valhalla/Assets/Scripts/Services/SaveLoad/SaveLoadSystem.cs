@@ -10,8 +10,8 @@ namespace Services.SaveLoad
 {
     public class SaveLoadSystem : BaseGameHandler<SaveLoadSystem>
     {
-        [SerializeField]
-        private GameStateMap _gameStateMap;
+        [SerializeField] private GameStateMap _gameStateMap;
+        [SerializeField] private bool _logging;
 
         public static event Action SaveLoaded;
 
@@ -27,7 +27,7 @@ namespace Services.SaveLoad
 
         private void OnSceneLoaded(string obj)
         {
-            Invoke(nameof(Load), 0.5f);
+            Invoke(nameof(Load), 0.3f);
         }
 
         private void OnItemEquipped(IStoreItem obj)
@@ -43,11 +43,6 @@ namespace Services.SaveLoad
         private void OnFlightEnded(FlightResultData obj)
         {
             Save();
-        }
-
-        private void Start()
-        {
-            Load();
         }
 
         private void OnApplicationQuit()
@@ -78,7 +73,7 @@ namespace Services.SaveLoad
         private void SaveInt(string key, int value)
         {
             PlayerPrefs.SetInt(key, value);
-            Debug.Log($"Key {key} with value {value} saved");
+            if(_logging) Debug.Log($"Key {key} with value {value} saved");
         }
 
         private void SaveDoubles()
@@ -94,7 +89,7 @@ namespace Services.SaveLoad
         private void SaveDouble(string key, double value)
         {
             PlayerPrefs.SetFloat(key, (float)value);
-            Debug.Log($"Key {key} with value {value} saved");
+            if(_logging) Debug.Log($"Key {key} with value {value} saved");
         }
 
         private void SaveBools()
@@ -110,7 +105,7 @@ namespace Services.SaveLoad
         private void SaveBool(string key, int value)
         {
             PlayerPrefs.SetInt(key, value);
-            Debug.Log($"Key {key} with value {value} saved");
+            if(_logging) Debug.Log($"Key {key} with value {value} saved");
         }
 
         private void SaveStrings()
@@ -126,7 +121,7 @@ namespace Services.SaveLoad
         private void SaveString(string key, string value)
         {
             PlayerPrefs.SetString(key, value);
-            Debug.Log($"Key {key} with value {value} saved");
+            if(_logging) Debug.Log($"Key {key} with value {value} saved");
         }
         #endregion
 
@@ -157,11 +152,11 @@ namespace Services.SaveLoad
             {
                 int value = PlayerPrefs.GetInt(key);
                 action.Invoke(value);
-                Debug.Log($"Key {key} loaded with value {value}");
+                if(_logging) Debug.Log($"Key {key} loaded with value {value}");
             } 
             else
             {
-                Debug.LogWarning($"Key {key} not found in PlayerPrefs");
+                if(_logging) Debug.LogWarning($"Key {key} not found in PlayerPrefs");
             }
         }
 
@@ -181,11 +176,11 @@ namespace Services.SaveLoad
             {
                 float value = PlayerPrefs.GetFloat(key);
                 action.Invoke(value);
-                Debug.Log($"Key {key} loaded with value {value}");
+                if(_logging) Debug.Log($"Key {key} loaded with value {value}");
             }
             else
             {
-                Debug.LogWarning($"Key {key} not found in PlayerPrefs");
+                if(_logging) Debug.LogWarning($"Key {key} not found in PlayerPrefs");
             }
         }
 
@@ -205,11 +200,11 @@ namespace Services.SaveLoad
             {
                 bool value = PlayerPrefs.GetInt(key) == 1;
                 action.Invoke(value);
-                Debug.Log($"Key {key} loaded with value {value}");
+                if(_logging) Debug.Log($"Key {key} loaded with value {value}");
             }
             else
             {
-                Debug.LogWarning($"Key {key} not found in PlayerPrefs");
+                if(_logging) Debug.LogWarning($"Key {key} not found in PlayerPrefs");
             }
         }
 
@@ -229,11 +224,11 @@ namespace Services.SaveLoad
             {
                 string value = PlayerPrefs.GetString(key);
                 action.Invoke(value);
-                Debug.Log($"Key {key} loaded with value {value}");
+                if(_logging) Debug.Log($"Key {key} loaded with value {value}");
             }
             else
             {
-                Debug.LogWarning($"Key {key} not found in PlayerPrefs");
+                if(_logging) Debug.LogWarning($"Key {key} not found in PlayerPrefs");
             }
         }
         #endregion
