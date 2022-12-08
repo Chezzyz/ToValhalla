@@ -30,7 +30,7 @@ namespace Player.Throws
             
             float duration = (velocity * sin + Mathf.Sqrt(Mathf.Pow(velocity * sin, 2) + 2 * 9.81f * originPos.y)) / 9.81f;
 
-            float deltaTime = 1f / 90;
+            float deltaTime = 1f / 40;
             int pointsCount = (int)((duration) / deltaTime);
 
             Vector2[] points = new Vector2[pointsCount];
@@ -58,7 +58,7 @@ namespace Player.Throws
         private CalculatedThrowData CalculateThrowDataDash(float velocity, Vector2 originPos, ScriptableHammerData hammerData)
         {
             float duration = (-velocity + Mathf.Sqrt(Mathf.Pow(velocity, 2) + 2 * 9.81f * originPos.y)) / 9.81f;
-            float deltaTime = 1f / 90;
+            float deltaTime = 1f / 40;
             int pointsCount = (int)((duration) / deltaTime);
 
             Vector2[] points = new Vector2[pointsCount];

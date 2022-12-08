@@ -37,8 +37,9 @@ namespace Player.Throws
                 
                 playerTransformController.SetPosition(nextPosition);
                 index++;
-                
-                yield return new WaitForSecondsRealtime(throwData.DeltaTime * 2/3);
+
+                yield return new WaitForFixedUpdate();
+                //yield return new WaitForSecondsRealtime(throwData.DeltaTime * 2/3);
             }
             ThrowCompleted?.Invoke();
             _isInThrow = false;
