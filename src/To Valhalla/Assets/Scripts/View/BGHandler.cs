@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Player;
 
@@ -10,8 +8,6 @@ public class BGHandler : MonoBehaviour
     [SerializeField] private GameObject _bgCenter;
     [SerializeField] private GameObject _bgRight;
     [SerializeField] private float _bgHalfSizeX;
-
-    private float _center = 0.0f;
 
     private void Update()
     {

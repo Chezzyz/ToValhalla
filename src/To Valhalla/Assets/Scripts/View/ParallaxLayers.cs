@@ -10,6 +10,8 @@ public class ParallaxLayers : MonoBehaviour
     private Transform _cameraTransform;
     private Vector3 _previousCameraPos;
 
+    public List<Transform> Layers => _layers;
+
     private void Start()
     {
         _cameraTransform = Camera.main.transform;
