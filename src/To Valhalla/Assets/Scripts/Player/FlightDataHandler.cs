@@ -8,14 +8,14 @@ namespace Player
 {
     public class FlightDataHandler : MonoBehaviour
     {
-        private PlayerFlightData _playerFlightData;
+        private PlayerFlightDataCounter _playerFlightDataCounter;
 
         public int FlightCoins { get; private set; } 
         public int FlightArtifactPieces { get; private set; }
 
         private void Start()
         {
-            _playerFlightData = new PlayerFlightData(1f);
+            _playerFlightDataCounter = new PlayerFlightDataCounter(1f);
         }
 
         private void OnEnable()
@@ -34,8 +34,8 @@ namespace Player
             ArtifactPiece.ArtifactPieceCollected -= OnArtifactPieceCollected;
         }
 
-        public int GetCurrentMaxFlightHeight() => _playerFlightData.GetCurrentMaxFlightHeight();
-        public float GetCurrentFlightTime() => _playerFlightData.GetCurrentFlightTime();
+        public int GetCurrentMaxFlightHeight() => _playerFlightDataCounter.GetCurrentMaxFlightHeight();
+        public float GetCurrentFlightTime() => _playerFlightDataCounter.GetCurrentFlightTime();
 
         private void OnArtifactPieceCollected()
         {
@@ -54,16 +54,16 @@ namespace Player
 
         private void OnThrowStarted(float arg1, float arg2)
         {
-            _playerFlightData.Reset();
-            StartCoroutine(FlightDataSimulation(_playerFlightData));
+            _playerFlightDataCounter.Reset();
+            StartCoroutine(FlightDataSimulation(_playerFlightDataCounter));
         }
 
-        private IEnumerator FlightDataSimulation(PlayerFlightData playerFlightData)
+        private IEnumerator FlightDataSimulation(PlayerFlightDataCounter playerFlightDataCounter)
         {
             while (true)
             {
                 yield return null;
-                playerFlightData.Update(Time.deltaTime, transform);
+                playerFlightDataCounter.Update(Time.deltaTime, transform);
             }
         }
         private void IncreaseFlightCoins(int value) => FlightCoins += value;

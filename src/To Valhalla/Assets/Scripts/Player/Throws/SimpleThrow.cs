@@ -7,8 +7,6 @@ namespace Player.Throws
     {
         private Coroutine _throwCoroutine;
 
-        private Vector2[] _points;
-
         public void DoSimpleThrow(PlayerTransformController controller, ScriptableHammerData hammerData, float directionAngle, float velocity)
         {
             CalculatedThrowData calculatedThrowData = CalculatedThrowDataPoints(directionAngle, velocity,
@@ -42,8 +40,6 @@ namespace Player.Throws
                 points[i-1] = new Vector2(x, y);
             }
 
-            _points = points;
-
             Debug.Log($"duration={duration}, pointsCount={pointsCount}, angle = {directionAngle}");
             return new CalculatedThrowData(points, deltaTime, velocity, radAngle, hammerData);
         }
@@ -71,15 +67,6 @@ namespace Player.Throws
 
             Debug.Log($"duration={duration}, pointsCount={pointsCount}");
             return new CalculatedThrowData(points, deltaTime, velocity, 270 * Mathf.Deg2Rad, hammerData);
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (_points is null) return;
-            foreach (var point in _points)
-            {
-                Gizmos.DrawSphere(point, 0.1f);
-            }
         }
     }
 }
