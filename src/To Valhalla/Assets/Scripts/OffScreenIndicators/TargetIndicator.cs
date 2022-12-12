@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Player;
 
 public class TargetIndicator : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class TargetIndicator : MonoBehaviour
     [SerializeField] private Image _inSightTargetIndicatorImage;
     [SerializeField] private RectTransform _offScreenTargetIndicator;
     [SerializeField] private float _outOfSightOffset = 20f;
+    [SerializeField] private float _minDistanceToShow;
 
     private float outOfSightOffest { get { return _outOfSightOffset /* canvasRect.localScale.x*/; } }
     private GameObject target;
     private Camera mainCamera;
     private RectTransform canvasRect;
     private RectTransform rectTransform;
+    private PlayerTransformController _playerTransform;
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class TargetIndicator : MonoBehaviour
         this.target = target;
         this.mainCamera = mainCamera;
         canvasRect = canvas.GetComponent<RectTransform>();
+        _playerTransform = FindObjectOfType<PlayerTransformController>();
     }
 
     public void UpdateTargetIndicator()
@@ -47,6 +51,15 @@ public class TargetIndicator : MonoBehaviour
 
     protected void SetIndicatorPosition()
     {
+        if (Vector3.Distance(target.transform.position, _playerTransform.GetPosition()) > _minDistanceToShow)
+        {
+            _offScreenTargetIndicator.gameObject.SetActive(false);
+            return;
+        }
+        else
+        { 
+            _offScreenTargetIndicator.gameObject.SetActive(true);
+        }
 
         //Get the position of the target in relation to the screenSpace 
         Vector3 indicatorPosition = mainCamera.WorldToScreenPoint(target.transform.position);
@@ -108,7 +121,6 @@ public class TargetIndicator : MonoBehaviour
             indicatorPosition.x = Mathf.Sign(indicatorPosition.x) * (canvasRect.rect.width * 0.5f - outOfSightOffest) * canvasRect.localScale.x;
             indicatorPosition.y = Mathf.Tan(Mathf.Deg2Rad * angle) * indicatorPosition.x;
         }
-
         //In case it intersects with y border first, put the y-one to the border and adjust the x-one accordingly (Trigonometry)
         else
         {
@@ -133,7 +145,7 @@ public class TargetIndicator : MonoBehaviour
             if (_offScreenTargetIndicator.gameObject.activeSelf == false) 
                 _offScreenTargetIndicator.gameObject.SetActive(true);
 
-            if (_inSightTargetIndicatorImage.isActiveAndEnabled == true) 
+            if (_inSightTargetIndicatorImage && _inSightTargetIndicatorImage.isActiveAndEnabled == true) 
                 _inSightTargetIndicatorImage.enabled = false;
 
             //Set the rotation of the OutOfSight direction indicator
@@ -146,14 +158,13 @@ public class TargetIndicator : MonoBehaviour
             //Debug.Log("CanvasRectCenter: " + canvasRect.rect.center);
             outOfSightArrow.rectTransform.rotation *= Quaternion.Euler(0f,90f,0f);*/
         }
-
         //In case that the indicator is InSight, turn on the inSight stuff and turn off the OOS stuff.
         else
         {
             if (_offScreenTargetIndicator.gameObject.activeSelf == true) 
                 _offScreenTargetIndicator.gameObject.SetActive(false);
 
-            if (_inSightTargetIndicatorImage.isActiveAndEnabled == false) 
+            if (_inSightTargetIndicatorImage && _inSightTargetIndicatorImage.isActiveAndEnabled == false) 
                 _inSightTargetIndicatorImage.enabled = true;
         }
     }

@@ -1,22 +1,25 @@
+using System;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerFlightData
+    public class PlayerFlightDataCounter
     {
-        private float _heightRaiseCoeffRelativeToYCoord = 1f;
-        private float _currentMaxHeight = 0.0f;
-        private float _maxHeight = 0.0f;
+        private float _heightRaiseCoefRelativeToYCoord = 1f;
+        private float _currentMaxHeight;
+        private int _currentHeight;
 
         private float _currentFlightTime;
 
-        public PlayerFlightData(float heightRaiseCoeffRelativeToYCoord)
+        public static event Action<int> CurrentHeightChanged; 
+
+        public PlayerFlightDataCounter(float heightRaiseCoefRelativeToYCoord)
         {
             /*Это коэффициент, как соотносится высота по Y в юнити с метрами высоты в вымышленном мире
              * Типа если мы пролетели 127 юнити единиц, а коэф у нас 10 например, то нам покажет что
              * мы пролетели в игре 1270 м.
             */
-            _heightRaiseCoeffRelativeToYCoord = heightRaiseCoeffRelativeToYCoord;
+            _heightRaiseCoefRelativeToYCoord = heightRaiseCoefRelativeToYCoord;
         }
 
         public void Update(float deltaTime, Transform transform)
@@ -32,9 +35,15 @@ namespace Player
             {
                 _currentMaxHeight = transform.position.y;
             }
+
+            if ((int)transform.position.y != _currentHeight)
+            {
+                _currentHeight = (int)transform.position.y;
+                CurrentHeightChanged?.Invoke(_currentHeight);
+            }
         }
 
-        public int GetCurrentMaxFlightHeight() => Mathf.FloorToInt(_currentMaxHeight * _heightRaiseCoeffRelativeToYCoord);
+        public int GetCurrentMaxFlightHeight() => Mathf.FloorToInt(_currentMaxHeight * _heightRaiseCoefRelativeToYCoord);
         public float GetCurrentFlightTime() => _currentFlightTime;
 
         public void Reset()

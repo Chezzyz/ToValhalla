@@ -7,8 +7,6 @@ namespace Player.Throws
     {
         private Coroutine _throwCoroutine;
 
-        private Vector2[] _points;
-
         public void DoSimpleThrow(PlayerTransformController controller, ScriptableHammerData hammerData, float directionAngle, float velocity)
         {
             CalculatedThrowData calculatedThrowData = CalculatedThrowDataPoints(directionAngle, velocity,
@@ -30,7 +28,7 @@ namespace Player.Throws
             
             float duration = (velocity * sin + Mathf.Sqrt(Mathf.Pow(velocity * sin, 2) + 2 * 9.81f * originPos.y)) / 9.81f;
 
-            float deltaTime = 1f / 90;
+            float deltaTime = 1f / 40;
             int pointsCount = (int)((duration) / deltaTime);
 
             Vector2[] points = new Vector2[pointsCount];
@@ -41,8 +39,6 @@ namespace Player.Throws
                 float y = originPos.y + velocity * Mathf.Sin(radAngle) * t - (9.81f * Mathf.Pow(t, 2) / 2);
                 points[i-1] = new Vector2(x, y);
             }
-
-            _points = points;
 
             Debug.Log($"duration={duration}, pointsCount={pointsCount}, angle = {directionAngle}");
             return new CalculatedThrowData(points, deltaTime, velocity, radAngle, hammerData);
@@ -58,7 +54,7 @@ namespace Player.Throws
         private CalculatedThrowData CalculateThrowDataDash(float velocity, Vector2 originPos, ScriptableHammerData hammerData)
         {
             float duration = (-velocity + Mathf.Sqrt(Mathf.Pow(velocity, 2) + 2 * 9.81f * originPos.y)) / 9.81f;
-            float deltaTime = 1f / 90;
+            float deltaTime = 1f / 40;
             int pointsCount = (int)((duration) / deltaTime);
 
             Vector2[] points = new Vector2[pointsCount];
@@ -71,15 +67,6 @@ namespace Player.Throws
 
             Debug.Log($"duration={duration}, pointsCount={pointsCount}");
             return new CalculatedThrowData(points, deltaTime, velocity, 270 * Mathf.Deg2Rad, hammerData);
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (_points is null) return;
-            foreach (var point in _points)
-            {
-                Gizmos.DrawSphere(point, 0.1f);
-            }
         }
     }
 }
