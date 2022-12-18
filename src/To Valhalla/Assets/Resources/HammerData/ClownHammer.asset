@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ClownHammer
   m_EditorClassIdentifier: 
   _name: Clown Hammer
-  _description: Clown hummer
+  _description: Honk Honk
   _sprite: {fileID: 21300000, guid: dbfe1a0f443432143ae9dd98751d320d, type: 3}
   _cost: 50
   _weight: 0.6

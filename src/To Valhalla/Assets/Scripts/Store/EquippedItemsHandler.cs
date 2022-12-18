@@ -3,6 +3,7 @@ using Artifacts;
 using Hammers;
 using Player;
 using Services;
+using Services.SaveLoad;
 using Store.View;
 using UnityEngine;
 
@@ -20,8 +21,11 @@ namespace Store
         public ScriptableArtifactData GetFirstArtifact() => _firstEquippedArtifactCell.Item as ScriptableArtifactData;
         public ScriptableArtifactData GetSecondArtifact() => _secondEquippedArtifactCell.Item as ScriptableArtifactData;
         public ScriptableHammerData GetHammer() => _equippedHammerCell.Item as ScriptableHammerData;
+
+        public ScriptableSkinData GetSkin() =>
+            _equippedSkin == null ? StoreItemsHandler.Instance.GetDefaultSkin() : _equippedSkin;
         
-        public ScriptableSkinData EquippedSkin { get; private set; }
+        private ScriptableSkinData _equippedSkin;
 
         private void OnEnable()
         {
@@ -106,7 +110,7 @@ namespace Store
         
         private void EquipSkin(IStoreItem skin)
         {
-            EquippedSkin = skin as ScriptableSkinData;
+            _equippedSkin = skin as ScriptableSkinData;
             ItemEquipped?.Invoke(skin);
         }
     }

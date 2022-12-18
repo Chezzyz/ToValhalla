@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WolfCross
   m_EditorClassIdentifier: 
   _name: Wolf Cross
-  _description: 
+  _description: Increases rebound force based on flight duration
   _sprite: {fileID: 21300000, guid: 0718a2d7fd913664bb7725e765c62ae6, type: 3}
-  _coinsCost: 1
-  _artifactPiecesCost: 1
-  _artifactEffect: 0
+  _coinsCost: 4000
+  _artifactPiecesCost: 80
+  _artifactEffect: 4

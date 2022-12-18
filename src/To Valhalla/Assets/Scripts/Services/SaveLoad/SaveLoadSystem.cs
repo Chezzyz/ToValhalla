@@ -21,7 +21,6 @@ namespace Services.SaveLoad
         {
             FlightResultHandler.PlayerFlightEnded += OnFlightEnded;
             StoreHandler.ItemBought += OnItemBought;
-            EquippedItemsHandler.ItemEquipped += OnItemEquipped;
             SceneLoader.SceneLoaded += OnSceneLoaded;
         }
 

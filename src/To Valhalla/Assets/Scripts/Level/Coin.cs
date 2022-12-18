@@ -16,9 +16,16 @@ namespace Level
         
         private static float s_colliderRadiusMultiplier = 1;
 
+        private bool _isFollowing;
+
         private void OnEnable()
         {
             _collider.radius = _defaultColliderRadius * s_colliderRadiusMultiplier;
+        }
+
+        public static void InvokeCoinCollected()
+        {
+            CoinCollected?.Invoke();
         }
 
         public static void SetColliderRadiusMultiplier(float value)
@@ -29,9 +36,10 @@ namespace Level
         private void OnTriggerEnter2D(Collider2D col)
         {
             PlayerTransformController player = col.GetComponentInParent<PlayerTransformController>();
-            if (player)
+            if (player && !_isFollowing)
             {
                 StartCoroutine(FollowViking(player));
+                _isFollowing = true;
             }
         }
 

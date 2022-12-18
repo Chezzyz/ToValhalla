@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: WinterViking
   m_EditorClassIdentifier: 
   _skinName: WinterViking
+  _description: 
+  _coinsCost: 100
   _idleSprite: {fileID: 21300000, guid: 574713b38f741314391997cc7f8bcade, type: 3}
   _flyingSprite: {fileID: 21300000, guid: 2f873ad1a361f3843a9447b3db606e61, type: 3}

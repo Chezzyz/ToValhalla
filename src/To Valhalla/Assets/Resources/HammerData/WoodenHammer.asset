@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodenHammer
   m_EditorClassIdentifier: 
   _name: Wooden Hammer
-  _description: default
+  _description: Your first hammer
   _sprite: {fileID: 21300000, guid: b214a9986830ca846b0862123d035e1e, type: 3}
   _cost: 0
   _weight: 1

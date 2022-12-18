@@ -26,6 +26,7 @@ namespace Input
         private Coroutine _powerCoroutine;
 
         private bool _isPreparationState = true;
+        public bool IsInfinitePowerScale { get; set; }
 
         private void OnEnable()
         {
@@ -79,15 +80,17 @@ namespace Input
 
         private IEnumerator PowerScaleCoroutine(float speed)
         {
-            float scaleValue = 0;
             while (true)
             {
+                float scaleValue = 0;
                 while (scaleValue <= 100)
                 {
                     scaleValue += speed * Time.deltaTime;
                     PowerScaleChanged?.Invoke(scaleValue);
                     yield return null;
                 }
+
+                if (IsInfinitePowerScale) continue;
                 
                 PowerScaleFailed?.Invoke();
                 break;

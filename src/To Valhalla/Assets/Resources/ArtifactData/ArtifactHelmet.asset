@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e703c1fc762dc54c867f87816dcae22, type: 3}
   m_Name: ArtifactHelmet
   m_EditorClassIdentifier: 
-  _name: ArtifactHelmet
-  _description: 
+  _name: Odin's Helmet
+  _description: Gives a coin when crashing into an obstacle
   _sprite: {fileID: 21300000, guid: a932a2783c318f74a966f327a8b83b13, type: 3}
-  _coinsCost: 1
-  _artifactPiecesCost: 1
-  _artifactEffect: 0
+  _coinsCost: 2500
+  _artifactPiecesCost: 50
+  _artifactEffect: 2

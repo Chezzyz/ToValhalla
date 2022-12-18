@@ -11,6 +11,8 @@ namespace Store
 {
     public class StoreItemsHandler : BaseGameHandler<StoreItemsHandler>
     {
+        [SerializeField] private ScriptableHammerData _defaultHammer;
+        [SerializeField] private ScriptableSkinData _defaultSkin;
         [SerializeField] private List<ScriptableHammerData> _hammers;
         [SerializeField] private List<ScriptableArtifactData> _artifacts;
         [SerializeField] private List<ScriptableSkinData> _skins;
@@ -26,6 +28,9 @@ namespace Store
         public IStoreItem GetHammerByName(string hammerName) => _hammers.Find(hammer => hammer.GetName() == hammerName);
         public IStoreItem GetArtifactByName(string artifactName) => _artifacts.Find(artifact => artifact.GetName() == artifactName);
         public IStoreItem GetSkinByName(string skinName) => _skins.Find(skin => skin.GetName() == skinName);
+
+        public ScriptableSkinData GetDefaultSkin() => _defaultSkin;
+        public ScriptableHammerData GetDefaultHammer => _defaultHammer;
 
         [Button]
         public void ResetAllItem()

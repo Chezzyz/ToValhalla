@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using System.Collections;
+using Input;
 using Level;
+using Player.Throws;
 using Store;
+using UnityEngine;
 
 namespace Player
 {
@@ -13,6 +14,8 @@ namespace Player
         public int FlightCoins { get; private set; } 
         public int FlightArtifactPieces { get; private set; }
 
+        public static float DurationSinceLastObstacle;
+
         private void Start()
         {
             _playerFlightDataCounter = new PlayerFlightDataCounter(1f);
@@ -20,16 +23,16 @@ namespace Player
 
         private void OnEnable()
         {
-            Input.ThrowScalesController.ThrowStarted += OnThrowStarted;
-            Throws.BaseThrow.ThrowCompleted += OnThrowCompleted;
+            ThrowScalesController.ThrowStarted += OnThrowStarted;
+            BaseThrow.ThrowCompleted += OnThrowCompleted;
             Coin.CoinCollected += OnCoinCollected;
             ArtifactPiece.ArtifactPieceCollected += OnArtifactPieceCollected;
         }
 
         private void OnDisable()
         {
-            Input.ThrowScalesController.ThrowStarted -= OnThrowStarted;
-            Throws.BaseThrow.ThrowCompleted -= OnThrowCompleted;
+            ThrowScalesController.ThrowStarted -= OnThrowStarted;
+            BaseThrow.ThrowCompleted -= OnThrowCompleted;
             Coin.CoinCollected -= OnCoinCollected;
             ArtifactPiece.ArtifactPieceCollected -= OnArtifactPieceCollected;
         }
@@ -64,6 +67,7 @@ namespace Player
             {
                 yield return null;
                 playerFlightDataCounter.Update(Time.deltaTime, transform);
+                DurationSinceLastObstacle += Time.deltaTime;
             }
         }
         private void IncreaseFlightCoins(int value) => FlightCoins += value;

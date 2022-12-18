@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Network;
+using Services.Settings;
 using Store;
 using UnityEngine;
 
@@ -10,10 +11,8 @@ namespace Services.SaveLoad
     public class GameStateMap : ScriptableObject
     {
         private const string USERNAME_ALIAS = "Username";
-
         private const string PLAYER_ID_ALIAS = "PlayerId";
 
-        //public static readonly string CURRENT_LEVEL_ALIAS = "CurrentLevel";
         private const string HAMMER_BOUGHT_PREFIX_ALIAS = "Hammer_";
         private const string ARTIFACT_BOUGHT_PREFIX_ALIAS = "Artifact_";
         private const string SKIN_BOUGHT_PREFIX_ALIAS = "Skin_";
@@ -24,10 +23,11 @@ namespace Services.SaveLoad
         private const string COINS_COUNT_ALIAS = "CoinsCount";
         private const string ARTIFACT_PIECES_COUNT_ALIAS = "ArtifactPiecesCount";
         private const string GAME_TIME_ALIAS = "GameTime";
-
+        private const string MUSIC_VOLUME_LEVEL_ALIAS = "MusicVolumeLevel";
+        private const string SOUND_VOLUME_LEVEL_ALIAS = "SoundVolumeLevel";
         private const string BEST_SCORES_PREFIX_ALIAS = "BestScore_";
-        // public static readonly string MUSIC_IS_ON_ALIAS = "MusicIsOn";
-        // public static readonly string VOLUME_LEVEL_ALIAS = "VolumeLevel";
+
+
         //private static readonly string LANGUAGE_ALIAS = "Language";
 
         public Dictionary<string, Func<int>> GetIntGameValuesMap()
@@ -35,9 +35,7 @@ namespace Services.SaveLoad
             return new Dictionary<string, Func<int>>
             {
                 { COINS_COUNT_ALIAS, () => CurrencyHandler.Instance.CoinsCount },
-                { ARTIFACT_PIECES_COUNT_ALIAS, () => CurrencyHandler.Instance.ArtifactPiecesCount },
-                //{ CURRENT_LEVEL_ALIAS, () => "Midguard" },
-                //{ VOLUME_LEVEL_ALIAS, () => SettingsHandler.GetVolumeLevel() }
+                { ARTIFACT_PIECES_COUNT_ALIAS, () => CurrencyHandler.Instance.ArtifactPiecesCount }
             };
         }
 
@@ -46,8 +44,7 @@ namespace Services.SaveLoad
             return new Dictionary<string, Action<int>>
             {
                 { COINS_COUNT_ALIAS, (value) => CurrencyHandler.Instance.SetCoins(value) },
-                { ARTIFACT_PIECES_COUNT_ALIAS, (value) => CurrencyHandler.Instance.SetArtifactPieces(value) },
-                //{ VOLUME_LEVEL_ALIAS, (value) => SettingsHandler.Instance.SetVolumeLevel(value) }
+                { ARTIFACT_PIECES_COUNT_ALIAS, (value) => CurrencyHandler.Instance.SetArtifactPieces(value) }
             };
         }
 
@@ -55,7 +52,9 @@ namespace Services.SaveLoad
         {
             return new Dictionary<string, Func<double>>
             {
-                { GAME_TIME_ALIAS, () => GameTimeHandler.Instance.GetGameTime().TotalSeconds }
+                { GAME_TIME_ALIAS, () => GameTimeHandler.Instance.GetGameTime().TotalSeconds },
+                { MUSIC_VOLUME_LEVEL_ALIAS, () => SettingsHandler.Instance.GetMusicVolume() },
+                { SOUND_VOLUME_LEVEL_ALIAS, () => SettingsHandler.Instance.GetSoundVolume() }
             };
         }
 
@@ -63,16 +62,15 @@ namespace Services.SaveLoad
         {
             return new Dictionary<string, Action<double>>
             {
-                { GAME_TIME_ALIAS, GameTimeHandler.Instance.SetGameTime }
+                { GAME_TIME_ALIAS, GameTimeHandler.Instance.SetGameTime },
+                { MUSIC_VOLUME_LEVEL_ALIAS, value => SettingsHandler.Instance.SetMusicVolume((float)value) },
+                { SOUND_VOLUME_LEVEL_ALIAS, value => SettingsHandler.Instance.SetSoundVolume((float)value) }
             };
         }
 
         public Dictionary<string, Func<bool>> GetBoolGameValuesMap()
         {
-            Dictionary<string, Func<bool>> boolsMap = new Dictionary<string, Func<bool>>
-            {
-                // { MUSIC_IS_ON_ALIAS, () => SettingsHandler.MusicIsOn() }
-            };
+            Dictionary<string, Func<bool>> boolsMap = new();
 
             AddBoolValuesForStoreItemBought(StoreItemsHandler.Instance.GetHammers(), HAMMER_BOUGHT_PREFIX_ALIAS,
                 boolsMap);
@@ -91,10 +89,7 @@ namespace Services.SaveLoad
 
         public Dictionary<string, Action<bool>> GetBoolGameValueSettersMap()
         {
-            Dictionary<string, Action<bool>> boolsMap = new Dictionary<string, Action<bool>>
-            {
-                // { MUSIC_IS_ON_ALIAS, (value) => SettingsHandler.Instance.SetMusicIsOn(value) }
-            };
+            Dictionary<string, Action<bool>> boolsMap = new();
 
             AddBoolValueSettersForStoreItem(StoreItemsHandler.Instance.GetHammers(), HAMMER_BOUGHT_PREFIX_ALIAS,
                 boolsMap);
@@ -121,9 +116,8 @@ namespace Services.SaveLoad
                 { PLAYER_ID_ALIAS, NetworkPlayerHandler.Instance.GetPlayerId },
                 { HAMMER_EQUIPPED_ALIAS, () => EquippedItemsHandler.Instance.GetHammer()?.GetName() },
                 { ARTIFACT_FIRST_EQUIPPED_ALIAS, () => EquippedItemsHandler.Instance.GetFirstArtifact()?.GetName() },
-                { ARTIFACT_SECOND_EQUIPPED_ALIAS, () => EquippedItemsHandler.Instance.GetSecondArtifact()?.GetName() }
-                // { LANGUAGE_ALIAS, () => LanguagePicker.Instance.GetLocale() }
-                // {SKIN_EQUIPPED_PREFIX_ALIAS, }
+                { ARTIFACT_SECOND_EQUIPPED_ALIAS, () => EquippedItemsHandler.Instance.GetSecondArtifact()?.GetName() },
+                { SKIN_EQUIPPED_PREFIX_ALIAS, EquippedItemsHandler.Instance.GetSkin().GetName }
             };
         }
 
@@ -152,8 +146,11 @@ namespace Services.SaveLoad
                             StoreItemsHandler.Instance.GetArtifactByName(artifactName),
                             1)
                 },
-
-                // { LANGUAGE_ALIAS, (value) => LanguagePicker.Instance.SetLocaleFromSave(value) }
+                {
+                    SKIN_EQUIPPED_PREFIX_ALIAS,
+                    (skinName) =>
+                        EquippedItemsHandler.Instance.EquipItem(StoreItemsHandler.Instance.GetSkinByName(skinName))
+                }
             };
         }
     }

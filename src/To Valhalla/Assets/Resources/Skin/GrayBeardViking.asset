@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: GrayBeardViking
   m_EditorClassIdentifier: 
   _skinName: GrayBeardViking
+  _description: 
+  _coinsCost: 50
   _idleSprite: {fileID: 21300000, guid: 01ee752aed069d04b9e018a08e5a457a, type: 3}
   _flyingSprite: {fileID: 21300000, guid: 160c609e0ecdd474b8d284828bab4e1b, type: 3}

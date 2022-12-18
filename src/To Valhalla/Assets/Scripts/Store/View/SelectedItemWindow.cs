@@ -17,13 +17,19 @@ namespace Store.View
         [SerializeField] private CirclePowerScaleView _scaleView;
         [Header("Button")] [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _buttonEquipText;
-        [SerializeField] private Image _currencySprite;
+        [SerializeField] private Image _coinSprite;
         [SerializeField] private TMP_Text _costText;
-        [Header("Artifact Buttons")]
-        [SerializeField] private Button _firstArtifactButton;
+
+        [Header("Artifact Buttons")] [SerializeField]
+        private Button _firstArtifactButton;
+
         [SerializeField] private Button _secondArtifactButton;
         [SerializeField] private Button _unselectArtifactButton;
         [SerializeField] private Sprite _artifactIcon;
+        [SerializeField] private TMP_Text _artifactCoinCostText;
+        [SerializeField] private TMP_Text _artifactPiecesCostText;
+        [SerializeField] private Image _artifactCoinSprite;
+        [SerializeField] private Image _artifactPiecesSprite;
 
         public static event Action<IStoreItem> ItemTryToBought;
         public static event Action<IStoreItem> ItemTryToEquip;
@@ -39,7 +45,8 @@ namespace Store.View
 
         private void OnItemEquipped(IStoreItem obj)
         {
-            if (_currentItem.GetStoreItemType() is StoreItemType.Hammer or StoreItemType.Skin) _button.interactable = false;
+            if (_currentItem.GetStoreItemType() is StoreItemType.Hammer or StoreItemType.Skin)
+                _button.interactable = false;
             if (_currentItem.GetStoreItemType() is StoreItemType.Artifact) SetupArtifactsEquipButtons(obj);
         }
 
@@ -47,7 +54,7 @@ namespace Store.View
         {
             if (_currentItem == item)
             {
-                if(item.GetStoreItemType() is StoreItemType.Artifact) SetupArtifactsEquipButtons(item);
+                if (item.GetStoreItemType() is StoreItemType.Artifact) SetupArtifactsEquipButtons(item);
                 else SetupButtonAsEquip(item);
             }
         }
@@ -59,7 +66,7 @@ namespace Store.View
             _itemSprite.sprite = item.GetSprite();
             _currentItem = item;
             SetupButtons(item);
-            
+
             if (item.GetStoreItemType() is StoreItemType.Hammer) SetupScales(item as ScriptableHammerData);
             else _scaleView.gameObject.SetActive(false);
         }
@@ -72,14 +79,15 @@ namespace Store.View
 
         private void SetupButtons(IStoreItem item)
         {
-            if (item.IsBought())
+            if (item.GetStoreItemType() is StoreItemType.Hammer or StoreItemType.Skin)
             {
-                if (item.GetStoreItemType() is StoreItemType.Hammer or StoreItemType.Skin) SetupButtonAsEquip(item);
-                if (item.GetStoreItemType() is StoreItemType.Artifact) SetupArtifactsEquipButtons(item);
+                if (item.IsBought()) SetupButtonAsEquip(item);
+                else SetupButtonAsBuy(item);
             }
-            else
+            if (item.GetStoreItemType() is StoreItemType.Artifact)
             {
-                SetupButtonAsBuy(item);
+                if (item.IsBought()) SetupArtifactsEquipButtons(item);
+                else SetupArtifactBuyButton(item);
             }
         }
 
@@ -119,26 +127,50 @@ namespace Store.View
 
         private void SetupButtonAsBuy(IStoreItem item)
         {
+           SetBuyButtonView(true, item);
+            _costText.text = item.GetCoinCost().ToString();
+
+            SetBuyButtonOn(item);
+        }
+
+        private void SetupArtifactBuyButton(IStoreItem item)
+        {
+            SetBuyButtonView(true, item);
+            _artifactCoinCostText.text = ((ScriptableArtifactData)item).GetCoinCost().ToString();
+            _artifactPiecesCostText.text = ((ScriptableArtifactData)item).GetArtifactPiecesCost().ToString();
+            
+            SetBuyButtonOn(item);
+        }
+
+        //true = artifact view, else = default view
+        private void SetBuyButtonView(bool state, IStoreItem item)
+        {
             SetActiveArtifactsButtons(false);
             _buttonEquipText.enabled = false;
-            _costText.enabled = true;
-            _currencySprite.enabled = true;
-
-            _costText.text = item.GetCoinCost().ToString();
-            _button.interactable = item.CanBuy();
             
+            _coinSprite.enabled = state && item.GetStoreItemType() != StoreItemType.Artifact;
+            _costText.enabled = state && item.GetStoreItemType() != StoreItemType.Artifact;
+
+            _artifactCoinSprite.enabled = state && item.GetStoreItemType() == StoreItemType.Artifact;
+            _artifactPiecesSprite.enabled = state && item.GetStoreItemType() == StoreItemType.Artifact;
+            _artifactCoinCostText.enabled = state && item.GetStoreItemType() == StoreItemType.Artifact;
+            _artifactPiecesCostText.enabled = state && item.GetStoreItemType() == StoreItemType.Artifact;
+        }
+
+        private void SetBuyButtonOn(IStoreItem item)
+        {
+            _button.interactable = item.CanBuy();
             _button.onClick.RemoveAllListeners();
             _button.onClick.AddListener(() => ItemTryToBought?.Invoke(item));
         }
 
         private void SetupButtonAsEquip(IStoreItem item)
         {
+            SetBuyButtonView(false, item);
             SetActiveArtifactsButtons(false);
             _button.interactable = !item.IsEquipped();
             _buttonEquipText.enabled = true;
-            _costText.enabled = false;
-            _currencySprite.enabled = false;
-            
+
             _button.onClick.RemoveAllListeners();
             _button.onClick.AddListener(() => ItemTryToEquip?.Invoke(item));
         }

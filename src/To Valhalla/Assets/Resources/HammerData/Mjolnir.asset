@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Mjolnir
   m_EditorClassIdentifier: 
   _name: Mjolnir
-  _description: Where is Tor?
+  _description: Stolen from Tor
   _sprite: {fileID: 21300000, guid: 00eafd82f4abab84f9233a8230f1eba9, type: 3}
-  _cost: 3500
+  _cost: 9000
   _weight: 3.5
   _hammerType: 1
   _scalePartsPercents:

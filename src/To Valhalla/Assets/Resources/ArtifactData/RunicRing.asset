@@ -15,6 +15,6 @@ MonoBehaviour:
   _name: Runic Ring
   _description: Increase collecting radius
   _sprite: {fileID: 21300000, guid: 54b7e58704341824985b7b94ebb9101f, type: 3}
-  _coinsCost: 1
-  _artifactPiecesCost: 1
+  _coinsCost: 1500
+  _artifactPiecesCost: 30
   _artifactEffect: 1

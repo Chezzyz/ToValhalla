@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Fish Hammer
   _description: Fish?
   _sprite: {fileID: 21300000, guid: 0d236d00c4ed3a646a12791fc9a4f204, type: 3}
-  _cost: 150
+  _cost: 300
   _weight: 1
   _hammerType: 1
   _scalePartsPercents:

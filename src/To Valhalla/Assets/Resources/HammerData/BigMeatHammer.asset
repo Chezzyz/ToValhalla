@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Big Meat Hammer
   _description: Very heavy
   _sprite: {fileID: 21300000, guid: 2c592ab502538e4438aaf0d2e8b06a7e, type: 3}
-  _cost: 1000
+  _cost: 2500
   _weight: 2
   _hammerType: 1
   _scalePartsPercents:

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RunicAmulet
   m_EditorClassIdentifier: 
   _name: Runic Amulet
-  _description: Increase  your money income
+  _description: Doubles your money income
   _sprite: {fileID: 21300000, guid: 68a1c33bcc1b93d4cab4030429123628, type: 3}
-  _coinsCost: 100
+  _coinsCost: 500
   _artifactPiecesCost: 10
   _artifactEffect: 0

@@ -29,7 +29,7 @@ namespace Player
         public void Reset() => _isBought = false;
         public bool CanBuy() => CurrencyHandler.Instance.CoinsCount >= _coinsCost;
         public bool IsBought() => _isBought;
-        public bool IsEquipped() => EquippedItemsHandler.Instance.EquippedSkin == this;
+        public bool IsEquipped() => EquippedItemsHandler.Instance.GetSkin() == this;
         public StoreItemType GetStoreItemType() => StoreItemType.Skin;
         #endregion
         

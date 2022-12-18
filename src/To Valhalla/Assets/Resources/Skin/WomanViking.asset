@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: WomanViking
   m_EditorClassIdentifier: 
   _skinName: WomanViking
+  _description: 
+  _coinsCost: 1
   _idleSprite: {fileID: 21300000, guid: 73f24a11f9a9087449832f6ae2788fad, type: 3}
   _flyingSprite: {fileID: 21300000, guid: f02268afb1e8c524abcee7890ca525bc, type: 3}
