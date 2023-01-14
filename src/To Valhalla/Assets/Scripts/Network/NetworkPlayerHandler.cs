@@ -6,6 +6,8 @@ namespace Network
 {
     public class NetworkPlayerHandler : BaseGameHandler<NetworkPlayerHandler>
     {
+        public static event Action<string> PlayerIDSetted;
+
         [SerializeField] private string _playerId;
         [SerializeField] private string _username;
 
@@ -14,6 +16,7 @@ namespace Network
             if (_playerId == string.Empty)
             {
                 _playerId = Guid.NewGuid().ToString();
+                PlayerIDSetted?.Invoke(_playerId);
             }
         }
 
