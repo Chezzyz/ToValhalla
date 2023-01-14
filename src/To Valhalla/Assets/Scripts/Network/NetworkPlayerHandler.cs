@@ -18,6 +18,11 @@ namespace Network
                 _playerId = Guid.NewGuid().ToString();
                 PlayerIDSetted?.Invoke(_playerId);
             }
+
+            if (_username == "")
+            {
+                _username = "Player_" + _playerId;
+            }
         }
 
         public string GetPlayerId() => _playerId;

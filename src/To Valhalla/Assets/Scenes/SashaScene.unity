@@ -13892,10 +13892,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 560777680969324279, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_text
+      value: "\u200B"
+      objectReference: {fileID: 0}
     - target: {fileID: 1743872940127869135, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
       propertyPath: _itemSprite
       value: 
       objectReference: {fileID: 1001230740}
+    - target: {fileID: 2180738784207196454, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180738784207196454, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 134658055}
+    - target: {fileID: 2180738784207196454, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetUsername
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180738784207196454, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Network.NetworkPlayerHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180738784207196454, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4110916608304274702, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
       propertyPath: _itemSprite
       value: 
@@ -14259,7 +14283,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7203234195720702500, guid: 180c6d0f5bd851f4e8dd493b99d2bd52, type: 3}
       propertyPath: _username
-      value: Chezzyz
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7203234195720702501, guid: 180c6d0f5bd851f4e8dd493b99d2bd52, type: 3}
       propertyPath: m_RootOrder
