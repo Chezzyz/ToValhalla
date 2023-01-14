@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Cinemachine;
 using Player.Throws;
 using UnityEngine;
@@ -28,25 +29,43 @@ namespace View
         private void OnEnable()
         {
             BaseThrow.VelocityChanged += OnVelocityChanged;
+            BaseThrow.ThrowCompleted += OnThrowCompleted;
+        }
+
+        private void OnThrowCompleted()
+        {
+            StartCoroutine(ResetCameraCoroutine(_camera, _cinemachineFramingTransposer, _baseSize));
+        }
+
+        private IEnumerator ResetCameraCoroutine(CinemachineVirtualCamera virtualCamera,
+            CinemachineFramingTransposer framingTransposer, float baseSize)
+        {
+            while (virtualCamera.m_Lens.OrthographicSize > baseSize)
+            {
+                SetCameraSizeWithLerp(virtualCamera, baseSize, _minSpeedCameraScale);
+                SetCameraOffsetYWithLerp(framingTransposer, 0);
+                yield return null;
+            }
         }
 
         private void OnVelocityChanged(float velocity, float verticalVelocity)
         {
-            SetCameraSize(_camera, _baseSize,
+            SetCameraSizeWithLerp(_camera, _baseSize,
                 Mathf.Lerp(_minSpeedCameraScale, _maxSpeedCameraScale, Mathf.Clamp01(velocity / _maxSpeed)));
 
-            SetCameraOffsetY(_cinemachineFramingTransposer,
+            SetCameraOffsetYWithLerp(_cinemachineFramingTransposer,
                 Mathf.Lerp(_negativeSpeedCameraOffset, _positiveSpeedCameraOffset,
                     Mathf.InverseLerp(-_maxVerticalSpeed, _maxVerticalSpeed, verticalVelocity)));
         }
 
-        private void SetCameraSize(CinemachineVirtualCamera virtualCamera, float baseSize, float scale)
+        private void SetCameraSizeWithLerp(CinemachineVirtualCamera virtualCamera, float baseSize, float scale)
         {
-            float newSize = Mathf.Lerp(virtualCamera.m_Lens.OrthographicSize, baseSize * scale, _cameraScaleSmoothSpeed);
+            float newSize = Mathf.Lerp(virtualCamera.m_Lens.OrthographicSize, baseSize * scale,
+                _cameraScaleSmoothSpeed);
             virtualCamera.m_Lens.OrthographicSize = newSize;
         }
 
-        private void SetCameraOffsetY(CinemachineFramingTransposer framingTransposer, float offset)
+        private void SetCameraOffsetYWithLerp(CinemachineFramingTransposer framingTransposer, float offset)
         {
             float newY = Mathf.Lerp(framingTransposer.m_TrackedObjectOffset.y, offset, _cameraOffsetSmoothSpeed);
 
@@ -56,6 +75,7 @@ namespace View
         private void OnDisable()
         {
             BaseThrow.VelocityChanged -= OnVelocityChanged;
+            BaseThrow.ThrowCompleted -= OnThrowCompleted;
         }
     }
 }

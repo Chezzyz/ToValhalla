@@ -114,7 +114,7 @@ namespace Services.SaveLoad
             {
                 { USERNAME_ALIAS, NetworkPlayerHandler.Instance.GetUsername },
                 { PLAYER_ID_ALIAS, NetworkPlayerHandler.Instance.GetPlayerId },
-                { HAMMER_EQUIPPED_ALIAS, () => EquippedItemsHandler.Instance.GetHammer()?.GetName() },
+                { HAMMER_EQUIPPED_ALIAS, EquippedItemsHandler.Instance.GetHammer().GetName },
                 { ARTIFACT_FIRST_EQUIPPED_ALIAS, () => EquippedItemsHandler.Instance.GetFirstArtifact()?.GetName() },
                 { ARTIFACT_SECOND_EQUIPPED_ALIAS, () => EquippedItemsHandler.Instance.GetSecondArtifact()?.GetName() },
                 { SKIN_EQUIPPED_PREFIX_ALIAS, EquippedItemsHandler.Instance.GetSkin().GetName }

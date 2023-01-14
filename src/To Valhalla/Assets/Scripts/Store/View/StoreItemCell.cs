@@ -95,6 +95,7 @@ namespace Store.View
         private void OnDisable()
         {
             EquippedItemsHandler.ItemEquipped -= OnItemEquipped;
+            StoreHandler.ItemBought -= OnItemBought;
             EquippedItemsHandler.ArtifactUnequipped -= OnArtifactUnequipped;
         }
     }

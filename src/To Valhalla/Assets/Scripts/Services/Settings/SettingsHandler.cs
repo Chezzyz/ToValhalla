@@ -1,5 +1,6 @@
 ﻿using System;
 using Services.SaveLoad;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Services.Settings
@@ -11,15 +12,15 @@ namespace Services.Settings
         private Slider _musicSlider;
         private Slider _soundSlider;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            Application.targetFrameRate = 60;
+        }
+
         private void OnEnable()
         {
             SceneLoader.SceneLoaded += OnSceneLoaded;
-            
-        }
-
-        private void OnSaveLoaded()
-        {
-            throw new NotImplementedException();
         }
 
         public float GetMusicVolume() => _musicSlider.value;

@@ -15,6 +15,7 @@ namespace Level
         public static event Action ArtifactPieceCollected;
         
         private static float s_colliderRadiusMultiplier = 1;
+        private bool _isFollowing;
 
         private void OnEnable()
         {
@@ -29,9 +30,10 @@ namespace Level
         private void OnTriggerEnter2D(Collider2D col)
         {
             PlayerTransformController player = col.GetComponentInParent<PlayerTransformController>();
-            if (player)
+            if (player && !_isFollowing)
             {
                 StartCoroutine(FollowViking(player));
+                _isFollowing = true;
             }
         }
         
@@ -43,7 +45,7 @@ namespace Level
             {
                 Vector3 distance = player.GetPosition() - GetCurrentPosition();
                 MoveParent(distance * (currentSpeed * Time.deltaTime));
-                yield return null;
+                yield return new WaitForFixedUpdate();
                 currentSpeed *= 1.05f;
             }
             Collect();
