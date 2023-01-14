@@ -53,7 +53,7 @@ namespace Level
             {
                 Vector3 distance = player.GetPosition() - GetCurrentPosition();
                 MoveParent(distance * (currentSpeed * Time.deltaTime));
-                yield return null;
+                yield return new WaitForFixedUpdate();
                 currentSpeed *= 1.05f;
             }
             Collect();

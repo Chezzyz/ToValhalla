@@ -20,7 +20,8 @@ namespace Store
 
         public ScriptableArtifactData GetFirstArtifact() => _firstEquippedArtifactCell.Item as ScriptableArtifactData;
         public ScriptableArtifactData GetSecondArtifact() => _secondEquippedArtifactCell.Item as ScriptableArtifactData;
-        public ScriptableHammerData GetHammer() => _equippedHammerCell.Item as ScriptableHammerData;
+        public ScriptableHammerData GetHammer() => _equippedHammerCell.Item == null ? StoreItemsHandler.Instance.GetDefaultHammer : 
+            _equippedHammerCell.Item as ScriptableHammerData;
 
         public ScriptableSkinData GetSkin() =>
             _equippedSkin == null ? StoreItemsHandler.Instance.GetDefaultSkin() : _equippedSkin;

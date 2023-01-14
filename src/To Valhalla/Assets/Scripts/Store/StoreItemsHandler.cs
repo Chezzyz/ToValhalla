@@ -33,11 +33,19 @@ namespace Store
         public ScriptableHammerData GetDefaultHammer => _defaultHammer;
 
         [Button]
-        public void ResetAllItem()
+        public void ResetAllItems()
         {
             _hammers.ForEach(hammer => hammer.Reset());
             _artifacts.ForEach(artifact => artifact.Reset());
             _skins.ForEach(skin => skin.Reset());
-        }        
+            SetDefaultItems();
+            Debug.Log("All Items reset");
+        }
+
+        private void SetDefaultItems()
+        {
+            _defaultSkin.Buy();
+            _defaultHammer.Buy();
+        }
     }
 }

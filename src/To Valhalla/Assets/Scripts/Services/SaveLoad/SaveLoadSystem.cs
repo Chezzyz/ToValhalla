@@ -244,7 +244,7 @@ namespace Services.SaveLoad
         public void ResetSaves()
         {
             PlayerPrefs.DeleteAll();
-            Debug.Log("All values reseted");
+            Debug.Log("All saved values reset");
         }
     }
 }
