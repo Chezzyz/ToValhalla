@@ -20,7 +20,13 @@ namespace Store
         private void OnEnable()
         {
             Coin.CoinCollected += OnCoinCollected;
+            Coin.VisualCoinCollected += OnVisualCoinCollected;
             ArtifactPiece.ArtifactPieceCollected += OnArtifactPieceCollected;
+        }
+
+        private void OnVisualCoinCollected()
+        {
+            CoinsCountChanged?.Invoke(CoinsCount);
         }
 
         private void OnCoinCollected()
@@ -36,7 +42,6 @@ namespace Store
         public void SetCoins(int value)
         {
             CoinsCount = value;
-            CoinsCountChanged?.Invoke(CoinsCount);
         }
 
         private void OnArtifactPieceCollected()
@@ -63,6 +68,7 @@ namespace Store
         private void OnDisable()
         {
             Coin.CoinCollected -= OnCoinCollected;
+            Coin.VisualCoinCollected -= OnVisualCoinCollected;
             ArtifactPiece.ArtifactPieceCollected -= OnArtifactPieceCollected;
         }
     }
