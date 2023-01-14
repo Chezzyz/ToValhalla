@@ -17,7 +17,7 @@ namespace Audio
 
         private void OnCoinCollected()
         {
-            PlayOneShot(_coinCollectedSound, 1 ,_coinCollectedVolumeScale);
+            PlayClip(_coinCollectedSound, 1 ,_coinCollectedVolumeScale);
         }
     }
 }

@@ -6,16 +6,24 @@ using System;
 public class GUIDHandler : MonoBehaviour
 {
     [SerializeField] private TMP_Text _GUID;
+    [SerializeField] private TMP_Text _username;
     [SerializeField] private Button _copyButton;
 
     private void Awake()
     {
         Network.NetworkPlayerHandler.PlayerIDSetted += OnPlayerIDSetted;
+        Network.NetworkPlayerHandler.PlayerNameSetted += OnPlayerNameSetted;
     }
 
     private void OnDestroy()
     {
         Network.NetworkPlayerHandler.PlayerIDSetted -= OnPlayerIDSetted;
+        Network.NetworkPlayerHandler.PlayerNameSetted -= OnPlayerNameSetted;
+    }
+
+    private void OnPlayerNameSetted(string username)
+    {
+        _username.text = username;
     }
 
     private void OnPlayerIDSetted(string playerID)

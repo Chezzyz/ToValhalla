@@ -6277,6 +6277,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8722476542036890235, guid: f6164546c1a82e848b011cf8b0ac3ede, type: 3}
   m_PrefabInstance: {fileID: 8722476543087890926}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1129294261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 560777680969324279, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+  m_PrefabInstance: {fileID: 6633374099019185728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1143419632
 GameObject:
   m_ObjectHideFlags: 0
@@ -14366,6 +14377,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8643841940381766117}
     - target: {fileID: 8684391975376917802, guid: 180c6d0f5bd851f4e8dd493b99d2bd52, type: 3}
+      propertyPath: _username
+      value: 
+      objectReference: {fileID: 1129294261}
+    - target: {fileID: 8684391975376917802, guid: 180c6d0f5bd851f4e8dd493b99d2bd52, type: 3}
       propertyPath: _copyButton
       value: 
       objectReference: {fileID: 1641113366}
@@ -14415,6 +14430,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2039444049, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 684800332401810849, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 684800332401810849, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 684800332401810849, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
@@ -14509,6 +14536,14 @@ PrefabInstance:
     - target: {fileID: 8643841941011853551, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
       propertyPath: m_Name
       value: cnv_Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115410470057751311, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115410470057751311, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3492c0bebaf4a78449171da48514e922, type: 3}
