@@ -4897,7 +4897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -12610,6 +12609,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1288290446}
     m_Modifications:
     - target: {fileID: 2710757558214829024, guid: 6cb02e2abb1e3f046b1a56eb6d073841, type: 3}
+      propertyPath: _uri
+      value: localhost:8080/api/players/saveSession
+      objectReference: {fileID: 0}
+    - target: {fileID: 2710757558214829024, guid: 6cb02e2abb1e3f046b1a56eb6d073841, type: 3}
       propertyPath: _uuidHandler
       value: 
       objectReference: {fileID: 134658055}
@@ -14310,6 +14313,18 @@ PrefabInstance:
     - target: {fileID: 6633374100015493288, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 2164260863
+      objectReference: {fileID: 0}
+    - target: {fileID: 6633374100627836058, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 38.4139
+      objectReference: {fileID: 0}
+    - target: {fileID: 6633374100627836058, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.5489
+      objectReference: {fileID: 0}
+    - target: {fileID: 6633374100627836059, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
+      propertyPath: m_text
+      value: Midgard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e58a80ab523ee46a810297aec79316, type: 3}
