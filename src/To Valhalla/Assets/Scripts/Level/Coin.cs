@@ -12,6 +12,7 @@ namespace Level
         [SerializeField] private CircleCollider2D _collider;
         [SerializeField] private float _collectRadius;
         [SerializeField] private float _defaultColliderRadius;
+        public static event Action VisualCoinCollected;
         public static event Action CoinCollected;
         
         private static float s_colliderRadiusMultiplier = 1;
@@ -25,7 +26,7 @@ namespace Level
 
         public static void InvokeCoinCollected()
         {
-            CoinCollected?.Invoke();
+            VisualCoinCollected?.Invoke();
         }
 
         public static void SetColliderRadiusMultiplier(float value)
@@ -38,6 +39,7 @@ namespace Level
             PlayerTransformController player = col.GetComponentInParent<PlayerTransformController>();
             if (player && !_isFollowing)
             {
+                CoinCollected?.Invoke();
                 StartCoroutine(FollowViking(player));
                 _isFollowing = true;
             }
@@ -70,7 +72,7 @@ namespace Level
 
         private void Collect()
         {
-            CoinCollected?.Invoke();
+            VisualCoinCollected?.Invoke();
             _renderer.enabled = false;
             _collider.enabled = false;
         }

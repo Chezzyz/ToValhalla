@@ -12,7 +12,7 @@ namespace Audio
         protected override void OnEnable()
         {
             base.OnEnable();
-            Coin.CoinCollected += OnCoinCollected;
+            Coin.VisualCoinCollected += OnCoinCollected;
         }
 
         private void OnCoinCollected()
